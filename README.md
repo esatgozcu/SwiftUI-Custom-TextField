@@ -1,6 +1,11 @@
 # SwiftUI Custom TextField
 
-This repository developed for SwiftUI textfield component. 
+This repository developed with only swiftUI, there is no UIViewRepresentable.
+
+#### Requirements
+- iOS 14.0+
+- Xcode 13+
+- Swift 5+
 
 ## Examples
 
