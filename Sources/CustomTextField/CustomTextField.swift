@@ -8,7 +8,7 @@
 import SwiftUI
 
 @available(iOS 13.0, *)
-struct CustomTextField: View {
+public struct CustomTextField: View {
     
     @Binding var text: String
     var textColor: Color? = .black
