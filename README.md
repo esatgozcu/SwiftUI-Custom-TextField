@@ -7,6 +7,14 @@ This repository developed with only swiftUI, there is no UIViewRepresentable.
 - Xcode 13+
 - Swift 5+
 
+#### Swift Package Manager
+
+CustomTextfield is available through [Swift Package Manager](https://swift.org/package-manager/). Add CustomTextField as a dependency to your `Package.swift`:
+
+```Swift
+.package(url: "https://github.com/esatgozcu/SwiftUI-Custom-TextField", from: "main")
+```
+
 ## Examples
 
 #### Default
