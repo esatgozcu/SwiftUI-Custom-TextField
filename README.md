@@ -63,7 +63,7 @@ CustomTextField(text: $text)
                 .setError(errorText: $errorText, error: $error)
 ```
 
-<img width="436" alt="Bottom Error" src="https://user-images.githubusercontent.com/35576161/228706920-b910a137-0146-42a5-a923-623a45fec10f.png">
+<img width="436" alt="Bottom error" src="https://user-images.githubusercontent.com/35576161/228711460-baddbe3a-7af8-4664-931e-2f8905c97dc4.png">
 
 
 #### Trailing Image

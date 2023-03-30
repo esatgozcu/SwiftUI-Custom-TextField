@@ -18,7 +18,7 @@ struct CustomTextField: View {
     var disableColor: Color? = .gray.opacity(0.5)
     var error: Binding<Bool>?
     var errorText: Binding<String>?
-    var errorColor: Color? = .red
+    var errorTextColor: Color? = .red
     var errorFont: Font?
     var trailingImage: Image?
     var trailingImageClick : (() -> Void)?
@@ -47,17 +47,17 @@ struct CustomTextField: View {
                     .disabled(disable?.wrappedValue ?? false)
             }.background(
                 RoundedRectangle(cornerRadius: 5.0)
-                    .stroke(Color.black)
+                    .stroke(error?.wrappedValue ?? false ? errorTextColor! : Color.black)
                     .background(
                         (disable?.wrappedValue ?? false ? disableColor : Color.clear)
                         .cornerRadius(5.0)
                     )
                     .frame(height: 50)
             )
-            if errorText != nil{
+            if error?.wrappedValue != nil{
                 Text(errorText?.wrappedValue ?? "")
                     .font(errorFont)
-                    .foregroundColor(errorColor)
+                    .foregroundColor(errorTextColor)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.top, 15)
             }
@@ -102,9 +102,9 @@ extension CustomTextField{
         copy.errorText = errorText
         return copy
     }
-    func setErrorColor(_ color: Color?) -> Self{
+    func setErrorTextColor(_ color: Color?) -> Self{
         var copy = self
-        copy.errorColor = color
+        copy.errorTextColor = color
         return copy
     }
     func setErrorFont(_ errorFont: Font?) -> Self{
