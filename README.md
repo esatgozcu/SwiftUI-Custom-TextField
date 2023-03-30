@@ -50,3 +50,19 @@ CustomTextField(text: $text)
 ```
 
 <img width="436" alt="Disable" src="https://user-images.githubusercontent.com/35576161/228703733-e3acdd34-b7b8-4e63-a768-c08eb85065ff.png">
+
+
+#### Bottom Error
+
+```swift
+@State var text = "Esat Gozcu"
+@State var error = true
+@State var errorText = "Your name did not matched"
+
+CustomTextField(text: $text)
+                .setError(errorText: $errorText, error: $error)
+```
+
+<img width="436" alt="Bottom Error" src="https://user-images.githubusercontent.com/35576161/228706920-b910a137-0146-42a5-a923-623a45fec10f.png">
+
+

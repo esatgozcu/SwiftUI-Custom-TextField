@@ -16,6 +16,10 @@ struct CustomTextField: View {
     var placeHolderText: String?
     var disable: Binding<Bool>?
     var disableColor: Color? = .gray.opacity(0.5)
+    var error: Binding<Bool>?
+    var errorText: Binding<String>?
+    var errorColor: Color? = .red
+    var errorFont: Font?
     
     var body: some View{
         VStack{
@@ -39,6 +43,13 @@ struct CustomTextField: View {
                         )
                         .frame(height: 50)
                 )
+            if (errorText != nil){
+                Text(errorText?.wrappedValue ?? "")
+                    .font(errorFont)
+                    .foregroundColor(errorColor)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.top, 15)
+            }
         }
     }
 }
@@ -74,18 +85,33 @@ extension CustomTextField{
         copy.disableColor = color
         return copy
     }
+    func setError(errorText: Binding<String>?, error: Binding<Bool>?) -> Self {
+        var copy = self
+        copy.error = error
+        copy.errorText = errorText
+        return copy
+    }
+    func setErrorColor(_ color: Color?) -> Self{
+        var copy = self
+        copy.errorColor = color
+        return copy
+    }
+    func setErrorFont(_ errorFont: Font?) -> Self{
+        var copy = self
+        copy.errorFont = errorFont
+        return copy
+    }
 }
 
 struct CustomTextField_Previews: PreviewProvider {
     
     @State static var text = "Esat Gozcu"
-    @State static var disable = true
+    @State static var error = true
+    @State static var errorText = "Your name did not matched"
 
     static var previews: some View {
         CustomTextField(text: $text)
-            .setPlaceHolderText("Enter your name")
-            .setTitleText("Name")
-            .setDisable($disable)
+            .setError(errorText: $errorText, error: $error)
             .padding()
     }
 }

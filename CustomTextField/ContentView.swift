@@ -9,15 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State  var text = "Esat Gozcu"
-    @State  var disable = false
+    @State var text = "Esat Gozcu"
+    @State var error = true
+    @State var errorText = "Your name did not matched"
     
     var body: some View {
         VStack {
             CustomTextField(text: $text)
-                .setPlaceHolderText("Enter your name")
-                .setTitleText("Name")
-                .setDisable($disable)
+                .setError(errorText: $errorText, error: $error)
         }
         .padding()
     }
