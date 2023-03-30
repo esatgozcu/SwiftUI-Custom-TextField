@@ -15,6 +15,7 @@ struct CustomTextField: View {
     var titleColor: Color? = .black
     var titleFont: Font?
     var placeHolderText: String?
+    var placeHolderTextColor: Color?
     var disable: Binding<Bool>?
     var disableColor: Color? = .gray.opacity(0.5)
     var error: Binding<Bool>?
@@ -44,6 +45,9 @@ struct CustomTextField: View {
             //TextField
             HStack(spacing: 0){
                 secureAnyView()
+                    .placeholder(when: text.isEmpty, placeholder: {
+                        Text(placeHolderText ?? "").foregroundColor(placeHolderTextColor)
+                    })
                     .frame(maxWidth: .infinity)
                     .foregroundColor(textColor)
                     .disabled(disable?.wrappedValue ?? false)
@@ -94,10 +98,10 @@ struct CustomTextField: View {
     
     func secureAnyView() -> AnyView{
         if !secureText{
-            return AnyView(TextField(placeHolderText ?? "", text: $text))
+            return AnyView(TextField("", text: $text))
         }
         else{
-            return AnyView(SecureField(placeHolderText ?? "", text: $text))
+            return AnyView(SecureField("", text: $text))
         }
     }
     
@@ -137,6 +141,11 @@ extension CustomTextField{
     func setPlaceHolderText(_ placeHolderText: String?) -> Self {
         var copy = self
         copy.placeHolderText = placeHolderText
+        return copy
+    }
+    func setPlaceHolderTextColor(_ color: Color?) -> Self{
+        var copy = self
+        copy.placeHolderTextColor = color
         return copy
     }
     func setDisable(_ disable: Binding<Bool>?) -> Self{
@@ -201,5 +210,18 @@ extension CustomTextField{
         var copy = self
         copy.borderColor = color
         return copy
+    }
+}
+
+extension View {
+    func placeholder<Content: View>(
+        when shouldShow: Bool,
+        alignment: Alignment = .leading,
+        @ViewBuilder placeholder: () -> Content) -> some View {
+
+        ZStack(alignment: alignment) {
+            placeholder().opacity(shouldShow ? 1 : 0)
+            self
+        }
     }
 }
