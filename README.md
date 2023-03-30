@@ -79,3 +79,25 @@ CustomTextField(text: $text)
 
 <img width="436" alt="Trailing Image" src="https://user-images.githubusercontent.com/35576161/228709637-445ed737-8a0f-4985-a6fd-b7e065588cc9.png">
 
+#### Secure Text
+
+```swift
+@State var text = "Esat Gozcu"
+
+CustomTextField(text: $text).setSecureText(true)
+```
+
+<img width="436" alt="Secure Text Close" src="https://user-images.githubusercontent.com/35576161/228730561-5205ed79-3679-4746-8bce-7801a56194c2.png">
+<img width="436" alt="Secure Text Open" src="https://user-images.githubusercontent.com/35576161/228730731-ddd7513e-3645-4d49-a4de-b17ee24bcd15.png">
+
+Secure text images can be changed
+
+```swift
+@State var text = "Esat Gozcu"
+
+CustomTextField(text: $text)
+              .setSecureText(true)
+              .setSecureTextImages(open : Image(systemName: "eye.fill"),
+                                   close: Image(systemName: "eye.slash.fill"))
+```
+

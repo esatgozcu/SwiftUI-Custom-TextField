@@ -20,11 +20,16 @@ struct CustomTextField: View {
     var errorText: Binding<String>?
     var errorTextColor: Color? = .red
     var errorFont: Font?
-    var trailingImage: Image?
-    var trailingImageClick : (() -> Void)?
-    
+    @State var trailingImage : Image?
+    var trailingImageClick: (() -> Void)?
+    @State var secureText = false
+    var isSecureText: Bool = false
+    var secureTextImageOpen : Image? = Image(systemName: "eye.fill")
+    var secureTextImageClose : Image? = Image(systemName: "eye.slash.fill")
+
     var body: some View{
         VStack{
+            //Title
             if titleText != nil{
                 Text(titleText ?? "")
                     .font(titleFont)
@@ -32,17 +37,33 @@ struct CustomTextField: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.bottom, 15)
             }
+            //TextField
             HStack(spacing: 0){
-                TextField(placeHolderText ?? "", text: $text)
-                    .frame(maxWidth: .infinity)
-                    .disabled(disable?.wrappedValue ?? false)
-                    .padding([.leading, .trailing], 12)
+                if !secureText{
+                    TextField(placeHolderText ?? "", text: $text)
+                        .frame(maxWidth: .infinity)
+                        .disabled(disable?.wrappedValue ?? false)
+                        .padding([.leading, .trailing], 12)
+                }
+                else{
+                    SecureField(placeHolderText ?? "", text: $text)
+                        .frame(maxWidth: .infinity)
+                        .disabled(disable?.wrappedValue ?? false)
+                        .padding([.leading, .trailing], 12)
+                }
                 trailingImage?
                     .resizable()
+                    .scaledToFit()
                     .frame(width: 25, height: 25)
                     .padding(.trailing, 12)
                     .onTapGesture {
-                        trailingImageClick?()
+                        if !isSecureText{
+                            trailingImageClick?()
+                        }
+                        else{
+                            secureText.toggle()
+                            trailingImage = secureText ? secureTextImageClose : secureTextImageOpen
+                        }
                     }
                     .disabled(disable?.wrappedValue ?? false)
             }.background(
@@ -54,12 +75,15 @@ struct CustomTextField: View {
                     )
                     .frame(height: 50)
             )
-            if error?.wrappedValue != nil{
-                Text(errorText?.wrappedValue ?? "")
-                    .font(errorFont)
-                    .foregroundColor(errorTextColor)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 15)
+            //Bottom text
+            if let error = error?.wrappedValue{
+                if error{
+                    Text(errorText?.wrappedValue ?? "")
+                        .font(errorFont)
+                        .foregroundColor(errorTextColor)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 15)
+                }
             }
         }
     }
@@ -114,8 +138,24 @@ extension CustomTextField{
     }
     func setTrailingImage(_ image: Image?, click: @escaping (()->Void)) -> Self{
         var copy = self
-        copy.trailingImage = image
+        copy._trailingImage = State(initialValue: image ?? Image(systemName: "xmark.octagon"))
         copy.trailingImageClick = click
+        return copy
+    }
+    func setSecureText(_ secure: Bool) -> Self{
+        var copy = self
+        copy._secureText = State(initialValue: secure)
+        if secure{
+            copy._trailingImage = State(initialValue: copy.secureTextImageClose)
+        }
+        copy.isSecureText = secure
+        return copy
+    }
+    func setSecureTextImages(open: Image, close: Image) -> Self{
+        var copy = self
+        copy.secureTextImageOpen = open
+        copy.secureTextImageClose = close
+        copy._trailingImage = State(initialValue: copy.secureTextImageClose)
         return copy
     }
 }

@@ -10,13 +10,13 @@ import SwiftUI
 struct ContentView: View {
     
     @State var text = "Esat Gozcu"
-    @State var error = true
-    @State var errorText = "Your name did not match"
 
     var body: some View {
         VStack {
             CustomTextField(text: $text)
-                .setError(errorText: $errorText, error: $error)
+                .setSecureText(true)
+                .setSecureTextImages(open: Image(systemName: "eye.fill"),
+                                     close: Image(systemName: "eye.slash.fill"))
         }
         .padding()
     }
