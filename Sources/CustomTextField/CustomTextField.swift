@@ -33,7 +33,7 @@ public struct CustomTextField: View {
     var truncationMode: Text.TruncationMode?
     var borderColor: Color?
     
-    var body: some View{
+    public var body: some View{
         VStack(spacing: 5){
             //Title
             if titleText != nil{
@@ -116,70 +116,70 @@ public struct CustomTextField: View {
     }
 }
 @available(iOS 13.0, *)
-internal extension CustomTextField{
-    func setTextColor(_ color: Color?) -> Self{
+extension CustomTextField{
+    public func setTextColor(_ color: Color?) -> Self{
         var copy = self
         copy.textColor = color
         return copy
     }
-    func setTitleText(_ titleText: String?) -> Self{
+    public func setTitleText(_ titleText: String?) -> Self{
         var copy = self
         copy.titleText = titleText
         return copy
     }
-    func setTitleColor(_ titleColor: Color?) -> Self{
+    public func setTitleColor(_ titleColor: Color?) -> Self{
         var copy = self
         copy.titleColor = titleColor
         return copy
     }
-    func setTitleFont(_ titleFont: Font?) -> Self{
+    public func setTitleFont(_ titleFont: Font?) -> Self{
         var copy = self
         copy.titleFont = titleFont
         return copy
     }
-    func setPlaceHolderText(_ placeHolderText: String?) -> Self {
+    public func setPlaceHolderText(_ placeHolderText: String?) -> Self {
         var copy = self
         copy.placeHolderText = placeHolderText
         return copy
     }
-    func setPlaceHolderTextColor(_ color: Color?) -> Self{
+    public func setPlaceHolderTextColor(_ color: Color?) -> Self{
         var copy = self
         copy.placeHolderTextColor = color
         return copy
     }
-    func setDisable(_ disable: Binding<Bool>?) -> Self{
+    public func setDisable(_ disable: Binding<Bool>?) -> Self{
         var copy = self
         copy.disable = disable
         return copy
     }
-    func setDisableColor(_ color: Color?) -> Self{
+    public func setDisableColor(_ color: Color?) -> Self{
         var copy = self
         copy.disableColor = color
         return copy
     }
-    func setError(errorText: Binding<String>?, error: Binding<Bool>?) -> Self {
+    public func setError(errorText: Binding<String>?, error: Binding<Bool>?) -> Self {
         var copy = self
         copy.error = error
         copy.errorText = errorText
         return copy
     }
-    func setErrorTextColor(_ color: Color?) -> Self{
+    public func setErrorTextColor(_ color: Color?) -> Self{
         var copy = self
         copy.errorTextColor = color
         return copy
     }
-    func setErrorFont(_ errorFont: Font?) -> Self{
+    public func setErrorFont(_ errorFont: Font?) -> Self{
         var copy = self
         copy.errorFont = errorFont
         return copy
     }
-    func setTrailingImage(_ image: Image?, click: @escaping (()->Void)) -> Self{
+    public func setTrailingImage(_ image: Image?, click: @escaping (()->Void)) -> Self{
         var copy = self
         copy._trailingImage = State(initialValue: image ?? Image(systemName: "xmark.octagon"))
         copy.trailingImageClick = click
         return copy
     }
-    func setSecureText(_ secure: Bool) -> Self{
+    public func setSecureText(_ secure: Bool) -> Self{
         var copy = self
         copy._secureText = State(initialValue: secure)
         if secure{
@@ -188,31 +188,31 @@ internal extension CustomTextField{
         copy.isSecureText = secure
         return copy
     }
-    func setSecureTextImages(open: Image, close: Image) -> Self{
+    public func setSecureTextImages(open: Image, close: Image) -> Self{
         var copy = self
         copy.secureTextImageOpen = open
         copy.secureTextImageClose = close
         copy._trailingImage = State(initialValue: copy.secureTextImageClose)
         return copy
     }
-    func setMaxCount(_ count: Int) -> Self{
+    public func setMaxCount(_ count: Int) -> Self{
         var copy = self
         copy.maxCount = count
         return copy
     }
-    func setTruncateMode(_ mode: Text.TruncationMode?) -> Self{
+    public func setTruncateMode(_ mode: Text.TruncationMode?) -> Self{
         var copy = self
         copy.truncationMode = mode ?? .tail
         return copy
     }
-    func setBorderColor(_ color: Color?) -> Self{
+    public func setBorderColor(_ color: Color?) -> Self{
         var copy = self
         copy.borderColor = color
         return copy
     }
 }
 @available(iOS 13.0, *)
-internal extension View {
+extension View {
     func placeholder<Content: View>(
         when shouldShow: Bool,
         alignment: Alignment = .leading,
