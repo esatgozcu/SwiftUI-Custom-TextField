@@ -135,5 +135,17 @@ CustomTextField(text: $text)
 
 <img width="436" alt="Border Color" src="https://user-images.githubusercontent.com/35576161/228738468-6ef33d39-79b5-4040-a890-48c97bce218a.png">
 
+#### Text Color
+
+```swift
+@State var text = "Esat Gozcu"
+
+CustomTextField(text: $text)
+                .setTextColor(.blue)
+```
+
+<img width="436" alt="Text Color" src="https://user-images.githubusercontent.com/35576161/228739233-9d3c63e1-d671-448a-bfbe-eb264e9c42a4.png">
+
+
 
 

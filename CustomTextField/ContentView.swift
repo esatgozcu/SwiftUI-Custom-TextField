@@ -14,7 +14,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             CustomTextField(text: $text)
-                .setBorderColor(.orange)
+                .setTextColor(.blue)
         }
         .padding()
     }

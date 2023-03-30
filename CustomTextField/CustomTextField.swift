@@ -10,6 +10,7 @@ import SwiftUI
 struct CustomTextField: View {
     
     @Binding var text: String
+    var textColor: Color? = .black
     var titleText: String?
     var titleColor: Color? = .black
     var titleFont: Font?
@@ -44,6 +45,7 @@ struct CustomTextField: View {
             HStack(spacing: 0){
                 secureAnyView()
                     .frame(maxWidth: .infinity)
+                    .foregroundColor(textColor)
                     .disabled(disable?.wrappedValue ?? false)
                     .padding([.leading, .trailing], 12)
                     .onReceive(text.publisher.collect()) {
@@ -112,6 +114,11 @@ struct CustomTextField: View {
 }
 
 extension CustomTextField{
+    func setTextColor(_ color: Color?) -> Self{
+        var copy = self
+        copy.textColor = color
+        return copy
+    }
     func setTitleText(_ titleText: String?) -> Self{
         var copy = self
         copy.titleText = titleText
