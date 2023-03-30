@@ -8,12 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State  var text = "Esat Gozcu"
+    @State  var disable = false
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            CustomTextField(text: $text)
+                .setPlaceHolderText("Enter your name")
+                .setTitleText("Name")
+                .setDisable($disable)
         }
         .padding()
     }

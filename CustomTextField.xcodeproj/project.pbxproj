@@ -11,6 +11,7 @@
 		0BB8840329D5074100ED56FB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB8840229D5074100ED56FB /* ContentView.swift */; };
 		0BB8840529D5074200ED56FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BB8840429D5074200ED56FB /* Assets.xcassets */; };
 		0BB8840829D5074200ED56FB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BB8840729D5074200ED56FB /* Preview Assets.xcassets */; };
+		0BB8840F29D507BB00ED56FB /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB8840E29D507BB00ED56FB /* CustomTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		0BB8840229D5074100ED56FB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0BB8840429D5074200ED56FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0BB8840729D5074200ED56FB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		0BB8840E29D507BB00ED56FB /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			children = (
 				0BB8840029D5074100ED56FB /* CustomTextFieldApp.swift */,
 				0BB8840229D5074100ED56FB /* ContentView.swift */,
+				0BB8840E29D507BB00ED56FB /* CustomTextField.swift */,
 				0BB8840429D5074200ED56FB /* Assets.xcassets */,
 				0BB8840629D5074200ED56FB /* Preview Content */,
 			);
@@ -139,6 +142,7 @@
 			files = (
 				0BB8840329D5074100ED56FB /* ContentView.swift in Sources */,
 				0BB8840129D5074100ED56FB /* CustomTextFieldApp.swift in Sources */,
+				0BB8840F29D507BB00ED56FB /* CustomTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
