@@ -113,4 +113,14 @@ CustomTextField(text: $text)
 
 <img width="436" alt="Max Count" src="https://user-images.githubusercontent.com/35576161/228733177-d59f53e3-848e-41f9-99c7-0499272f353a.png">
 
+#### Truncation Mode
+
+```swift
+@State var text = "esat1feyk23mqjyefycrfk862x78cyk2sy9l0t8rt6c"
+
+CustomTextField(text: $text)
+                .setTruncateMode(.middle)
+```
+
+<img width="436" alt="Truncation Mode" src="https://user-images.githubusercontent.com/35576161/228734064-981156ab-daba-4ee5-b2ed-c951fc11e476.png">
 

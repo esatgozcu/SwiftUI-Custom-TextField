@@ -27,6 +27,7 @@ struct CustomTextField: View {
     var secureTextImageOpen : Image? = Image(systemName: "eye.fill")
     var secureTextImageClose : Image? = Image(systemName: "eye.slash.fill")
     var maxCount: Int = 0
+    var truncationMode: Text.TruncationMode?
 
     var body: some View{
         VStack{
@@ -50,6 +51,7 @@ struct CustomTextField: View {
                             text = s
                         }
                     }
+                    .truncationMode(truncationMode ?? Text.TruncationMode.tail)
                 trailingImage?
                     .resizable()
                     .scaledToFit()
@@ -169,6 +171,11 @@ extension CustomTextField{
     func setMaxCount(_ count: Int) -> Self{
         var copy = self
         copy.maxCount = count
+        return copy
+    }
+    func setTruncateMode(_ mode: Text.TruncationMode?) -> Self{
+        var copy = self
+        copy.truncationMode = mode ?? .tail
         return copy
     }
 }
