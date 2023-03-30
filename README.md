@@ -67,13 +67,13 @@ CustomTextField(text: $text)
 ```swift
 @State var text = "Esat Gozcu"
 @State var error = true
-@State var errorText = "Your name did not matched"
+@State var errorText = "Your name is not matched"
 
 CustomTextField(text: $text)
                 .setError(errorText: $errorText, error: $error)
 ```
 
-<img width="436" alt="Bottom error" src="https://user-images.githubusercontent.com/35576161/228711460-baddbe3a-7af8-4664-931e-2f8905c97dc4.png">
+<img width="436" alt="Bottom Error" src="https://user-images.githubusercontent.com/35576161/228750294-0ffbb52f-c7ec-47f6-98f7-bd9c54ab3034.png">
 
 
 #### Trailing Image

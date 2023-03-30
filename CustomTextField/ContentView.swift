@@ -10,11 +10,13 @@ import SwiftUI
 struct ContentView: View {
     
     @State var text = "Esat Gozcu"
+    @State var error = true
+    @State var errorText = "Your name is not matched"
 
     var body: some View {
         VStack {
             CustomTextField(text: $text)
-                .setTextColor(.blue)
+                .setError(errorText: $errorText, error: $error)
         }
         .padding()
     }

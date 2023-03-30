@@ -33,14 +33,13 @@ struct CustomTextField: View {
     var borderColor: Color?
     
     var body: some View{
-        VStack{
+        VStack(spacing: 5){
             //Title
             if titleText != nil{
                 Text(titleText ?? "")
-                    .font(titleFont)
+                    .font(titleFont ?? .callout)
                     .foregroundColor(titleColor)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.bottom, 15)
             }
             //TextField
             HStack(spacing: 0){
@@ -49,6 +48,7 @@ struct CustomTextField: View {
                         Text(placeHolderText ?? "").foregroundColor(placeHolderTextColor)
                     })
                     .frame(maxWidth: .infinity)
+                    .frame(height: 50)
                     .foregroundColor(textColor)
                     .disabled(disable?.wrappedValue ?? false)
                     .padding([.leading, .trailing], 12)
@@ -81,16 +81,14 @@ struct CustomTextField: View {
                         (disable?.wrappedValue ?? false ? disableColor : Color.clear)
                         .cornerRadius(5.0)
                     )
-                    .frame(height: 50)
             )
             //Bottom text
             if let error = error?.wrappedValue{
                 if error{
                     Text(errorText?.wrappedValue ?? "")
-                        .font(errorFont)
+                        .font(errorFont ?? .footnote)
                         .foregroundColor(errorTextColor)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.top, 15)
                 }
             }
         }
