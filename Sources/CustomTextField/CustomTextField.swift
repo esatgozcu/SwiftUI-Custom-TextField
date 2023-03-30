@@ -8,7 +8,7 @@
 import SwiftUI
 
 @available(iOS 13.0, *)
-struct CustomTextField: View {
+internal struct CustomTextField: View {
     
     @Binding var text: String
     var textColor: Color? = .black
@@ -116,7 +116,7 @@ struct CustomTextField: View {
     }
 }
 @available(iOS 13.0, *)
-extension CustomTextField{
+internal extension CustomTextField{
     func setTextColor(_ color: Color?) -> Self{
         var copy = self
         copy.textColor = color
@@ -212,7 +212,7 @@ extension CustomTextField{
     }
 }
 @available(iOS 13.0, *)
-extension View {
+internal extension View {
     func placeholder<Content: View>(
         when shouldShow: Bool,
         alignment: Alignment = .leading,
