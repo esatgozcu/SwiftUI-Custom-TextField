@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 13.0, *)
 struct CustomTextField: View {
     
     @Binding var text: String
@@ -114,7 +115,7 @@ struct CustomTextField: View {
         }
     }
 }
-
+@available(iOS 13.0, *)
 extension CustomTextField{
     func setTextColor(_ color: Color?) -> Self{
         var copy = self
@@ -210,7 +211,7 @@ extension CustomTextField{
         return copy
     }
 }
-
+@available(iOS 13.0, *)
 extension View {
     func placeholder<Content: View>(
         when shouldShow: Bool,
