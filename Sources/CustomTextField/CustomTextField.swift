@@ -10,28 +10,53 @@ import SwiftUI
 @available(iOS 13.0, *)
 public struct CustomTextField: View {
     
-    @Binding var text: String
-    var textColor: Color? = .black
+    var text: Binding<String>
+    var textColor: Color?
     var titleText: String?
-    var titleColor: Color? = .black
+    var titleColor: Color?
     var titleFont: Font?
     var placeHolderText: String?
     var placeHolderTextColor: Color?
     var disable: Binding<Bool>?
-    var disableColor: Color? = .gray.opacity(0.5)
+    var disableColor: Color?
     var error: Binding<Bool>?
     var errorText: Binding<String>?
-    var errorTextColor: Color? = .red
+    var errorTextColor: Color?
     var errorFont: Font?
     @State var trailingImage : Image?
     var trailingImageClick: (() -> Void)?
     @State var secureText = false
     var isSecureText: Bool = false
-    var secureTextImageOpen : Image? = Image(systemName: "eye.fill")
-    var secureTextImageClose : Image? = Image(systemName: "eye.slash.fill")
-    var maxCount: Int = 0
+    var secureTextImageOpen : Image?
+    var secureTextImageClose : Image?
+    var maxCount: Int?
     var truncationMode: Text.TruncationMode?
     var borderColor: Color?
+    
+    public init(text: Binding<String>, textColor: Color? = .black, titleText: String? = nil, titleColor: Color? = .black, titleFont: Font? = nil, placeHolderText: String? = nil, placeHolderTextColor: Color? = nil, disable: Binding<Bool>? = nil, disableColor: Color? = .gray.opacity(0.5), error: Binding<Bool>? = nil, errorText: Binding<String>? = nil, errorTextColor: Color? = .red, errorFont: Font? = nil, trailingImage: Image? = nil, trailingImageClick: (() -> Void)? = nil, secureText: Bool = false, isSecureText: Bool = false, secureTextImageOpen: Image? = Image(systemName: "eye.fill"), secureTextImageClose: Image? = Image(systemName: "eye.slash.fill"), maxCount: Int = 0, truncationMode: Text.TruncationMode? = nil, borderColor: Color? = nil) {
+        self.text = text
+        self.textColor = textColor
+        self.titleText = titleText
+        self.titleColor = titleColor
+        self.titleFont = titleFont
+        self.placeHolderText = placeHolderText
+        self.placeHolderTextColor = placeHolderTextColor
+        self.disable = disable
+        self.disableColor = disableColor
+        self.error = error
+        self.errorText = errorText
+        self.errorTextColor = errorTextColor
+        self.errorFont = errorFont
+        self.trailingImage = trailingImage
+        self.trailingImageClick = trailingImageClick
+        self.secureText = secureText
+        self.isSecureText = isSecureText
+        self.secureTextImageOpen = secureTextImageOpen
+        self.secureTextImageClose = secureTextImageClose
+        self.maxCount = maxCount
+        self.truncationMode = truncationMode
+        self.borderColor = borderColor
+    }
     
     public var body: some View{
         VStack(spacing: 5){
@@ -45,7 +70,7 @@ public struct CustomTextField: View {
             //TextField
             HStack(spacing: 0){
                 secureAnyView()
-                    .placeholder(when: text.isEmpty, placeholder: {
+                    .placeholder(when: text.wrappedValue.isEmpty, placeholder: {
                         Text(placeHolderText ?? "").foregroundColor(placeHolderTextColor)
                     })
                     .frame(maxWidth: .infinity)
@@ -53,10 +78,10 @@ public struct CustomTextField: View {
                     .foregroundColor(textColor)
                     .disabled(disable?.wrappedValue ?? false)
                     .padding([.leading, .trailing], 12)
-                    .onReceive(text.publisher.collect()) {
-                        let s = String($0.prefix(maxCount))
-                        if text != s && (maxCount != 0){
-                            text = s
+                    .onReceive(text.wrappedValue.publisher.collect()) {
+                        let s = String($0.prefix(maxCount ?? 0))
+                        if text.wrappedValue != s && (maxCount != 0){
+                            text.wrappedValue = s
                         }
                     }
                     .truncationMode(truncationMode ?? Text.TruncationMode.tail)
@@ -97,10 +122,10 @@ public struct CustomTextField: View {
     
     func secureAnyView() -> AnyView{
         if !secureText{
-            return AnyView(TextField("", text: $text))
+            return AnyView(TextField("", text: text))
         }
         else{
-            return AnyView(SecureField("", text: $text))
+            return AnyView(SecureField("", text: text))
         }
     }
     
