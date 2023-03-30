@@ -33,7 +33,29 @@ public struct CustomTextField: View {
     var truncationMode: Text.TruncationMode?
     var borderColor: Color?
     
-    public init(text: Binding<String>, textColor: Color? = .black, titleText: String? = nil, titleColor: Color? = .black, titleFont: Font? = nil, placeHolderText: String? = nil, placeHolderTextColor: Color? = nil, disable: Binding<Bool>? = nil, disableColor: Color? = .gray.opacity(0.5), error: Binding<Bool>? = nil, errorText: Binding<String>? = nil, errorTextColor: Color? = .red, errorFont: Font? = nil, trailingImage: Image? = nil, trailingImageClick: (() -> Void)? = nil, secureText: Bool = false, isSecureText: Bool = false, secureTextImageOpen: Image? = Image(systemName: "eye.fill"), secureTextImageClose: Image? = Image(systemName: "eye.slash.fill"), maxCount: Int = 0, truncationMode: Text.TruncationMode? = nil, borderColor: Color? = nil) {
+    public init(text: Binding<String>,
+                textColor: Color? = .black,
+                titleText: String? = nil,
+                titleColor: Color? = .black,
+                titleFont: Font? = nil,
+                placeHolderText: String? = nil,
+                placeHolderTextColor: Color? = nil,
+                disable: Binding<Bool>? = nil,
+                disableColor: Color? = .gray.opacity(0.5),
+                error: Binding<Bool>? = nil,
+                errorText: Binding<String>? = nil,
+                errorTextColor: Color? = .red,
+                errorFont: Font? = nil,
+                trailingImage: Image? = nil,
+                trailingImageClick: (() -> Void)? = nil,
+                secureText: Bool = false,
+                isSecureText: Bool = false,
+                secureTextImageOpen: Image? = Image(systemName: "eye.fill"),
+                secureTextImageClose: Image? = Image(systemName: "eye.slash.fill"),
+                maxCount: Int = 0,
+                truncationMode: Text.TruncationMode? = nil,
+                borderColor: Color? = nil
+    ) {
         self.text = text
         self.textColor = textColor
         self.titleText = titleText

@@ -3,7 +3,7 @@
 This repository developed with only swiftUI, there is no UIViewRepresentable.
 
 #### Requirements
-- iOS 14.0+
+- iOS 13.0+
 - Xcode 13+
 - Swift 5+
 
