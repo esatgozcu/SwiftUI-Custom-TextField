@@ -10,13 +10,13 @@ import SwiftUI
 struct ContentView: View {
     
     @State var text = "Esat Gozcu"
-    @State var error = true
-    @State var errorText = "Your name did not matched"
     
     var body: some View {
         VStack {
             CustomTextField(text: $text)
-                .setError(errorText: $errorText, error: $error)
+                .setTrailingImage(Image(systemName: "qrcode"), click: {
+                    print("qr image tapped")
+                })
         }
         .padding()
     }

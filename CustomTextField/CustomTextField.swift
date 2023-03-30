@@ -20,30 +20,41 @@ struct CustomTextField: View {
     var errorText: Binding<String>?
     var errorColor: Color? = .red
     var errorFont: Font?
+    var trailingImage: Image?
+    var trailingImageClick : (() -> Void)?
     
     var body: some View{
         VStack{
-            if (titleText != nil){
+            if titleText != nil{
                 Text(titleText ?? "")
                     .font(titleFont)
                     .foregroundColor(titleColor)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.bottom, 15)
             }
-            TextField(placeHolderText ?? "", text: $text)
-                .frame(maxWidth: .infinity)
-                .disabled(disable?.wrappedValue ?? false)
-                .padding([.leading, .trailing], 12)
-                .background(
-                    RoundedRectangle(cornerRadius: 5.0)
-                        .stroke(Color.black)
-                        .background(
-                            (disable?.wrappedValue ?? false ? disableColor : Color.clear)
-                            .cornerRadius(5.0)
-                        )
-                        .frame(height: 50)
-                )
-            if (errorText != nil){
+            HStack(spacing: 0){
+                TextField(placeHolderText ?? "", text: $text)
+                    .frame(maxWidth: .infinity)
+                    .disabled(disable?.wrappedValue ?? false)
+                    .padding([.leading, .trailing], 12)
+                trailingImage?
+                    .resizable()
+                    .frame(width: 25, height: 25)
+                    .padding(.trailing, 12)
+                    .onTapGesture {
+                        trailingImageClick?()
+                    }
+                    .disabled(disable?.wrappedValue ?? false)
+            }.background(
+                RoundedRectangle(cornerRadius: 5.0)
+                    .stroke(Color.black)
+                    .background(
+                        (disable?.wrappedValue ?? false ? disableColor : Color.clear)
+                        .cornerRadius(5.0)
+                    )
+                    .frame(height: 50)
+            )
+            if errorText != nil{
                 Text(errorText?.wrappedValue ?? "")
                     .font(errorFont)
                     .foregroundColor(errorColor)
@@ -101,18 +112,10 @@ extension CustomTextField{
         copy.errorFont = errorFont
         return copy
     }
-}
-
-struct CustomTextField_Previews: PreviewProvider {
-    
-    @State static var text = "Esat Gozcu"
-    @State static var error = true
-    @State static var errorText = "Your name did not matched"
-
-    static var previews: some View {
-        CustomTextField(text: $text)
-            .setError(errorText: $errorText, error: $error)
-            .padding()
+    func setTrailingImage(_ image: Image?, click: @escaping (()->Void)) -> Self{
+        var copy = self
+        copy.trailingImage = image
+        copy.trailingImageClick = click
+        return copy
     }
 }
-

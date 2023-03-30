@@ -66,3 +66,16 @@ CustomTextField(text: $text)
 <img width="436" alt="Bottom Error" src="https://user-images.githubusercontent.com/35576161/228706920-b910a137-0146-42a5-a923-623a45fec10f.png">
 
 
+#### Trailing Image
+
+```swift
+@State var text = "Esat Gozcu"
+
+CustomTextField(text: $text)
+                .setTrailingImage(Image(systemName: "qrcode"), click: {
+                    print("qr image tapped")
+                })
+```
+
+<img width="436" alt="Trailing Image" src="https://user-images.githubusercontent.com/35576161/228709637-445ed737-8a0f-4985-a6fd-b7e065588cc9.png">
+
