@@ -14,9 +14,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             CustomTextField(text: $text)
-                .setSecureText(true)
-                .setSecureTextImages(open: Image(systemName: "eye.fill"),
-                                     close: Image(systemName: "eye.slash.fill"))
+                .setMaxCount(8)
         }
         .padding()
     }

@@ -84,7 +84,8 @@ CustomTextField(text: $text)
 ```swift
 @State var text = "Esat Gozcu"
 
-CustomTextField(text: $text).setSecureText(true)
+CustomTextField(text: $text)
+               .setSecureText(true)
 ```
 
 <img width="436" alt="Secure Text Close" src="https://user-images.githubusercontent.com/35576161/228730561-5205ed79-3679-4746-8bce-7801a56194c2.png">
@@ -96,8 +97,20 @@ Secure text images can be changed
 @State var text = "Esat Gozcu"
 
 CustomTextField(text: $text)
-              .setSecureText(true)
-              .setSecureTextImages(open : Image(systemName: "eye.fill"),
-                                   close: Image(systemName: "eye.slash.fill"))
+                .setSecureText(true)
+                .setSecureTextImages(open : Image(systemName: "eye.fill"),
+                                     close: Image(systemName: "eye.slash.fill"))
 ```
+
+#### Max Count
+
+```swift
+@State var text = "Esat Gozcu"
+
+CustomTextField(text: $text)
+                .setMaxCount(8)
+```
+
+<img width="436" alt="Max Count" src="https://user-images.githubusercontent.com/35576161/228733177-d59f53e3-848e-41f9-99c7-0499272f353a.png">
+
 

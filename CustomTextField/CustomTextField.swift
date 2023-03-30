@@ -26,6 +26,7 @@ struct CustomTextField: View {
     var isSecureText: Bool = false
     var secureTextImageOpen : Image? = Image(systemName: "eye.fill")
     var secureTextImageClose : Image? = Image(systemName: "eye.slash.fill")
+    var maxCount: Int = 0
 
     var body: some View{
         VStack{
@@ -39,18 +40,16 @@ struct CustomTextField: View {
             }
             //TextField
             HStack(spacing: 0){
-                if !secureText{
-                    TextField(placeHolderText ?? "", text: $text)
-                        .frame(maxWidth: .infinity)
-                        .disabled(disable?.wrappedValue ?? false)
-                        .padding([.leading, .trailing], 12)
-                }
-                else{
-                    SecureField(placeHolderText ?? "", text: $text)
-                        .frame(maxWidth: .infinity)
-                        .disabled(disable?.wrappedValue ?? false)
-                        .padding([.leading, .trailing], 12)
-                }
+                secureAnyView(secure: secureText)
+                    .frame(maxWidth: .infinity)
+                    .disabled(disable?.wrappedValue ?? false)
+                    .padding([.leading, .trailing], 12)
+                    .onReceive(text.publisher.collect()) {
+                        let s = String($0.prefix(maxCount))
+                        if text != s && (maxCount != 0){
+                            text = s
+                        }
+                    }
                 trailingImage?
                     .resizable()
                     .scaledToFit()
@@ -85,6 +84,15 @@ struct CustomTextField: View {
                         .padding(.top, 15)
                 }
             }
+        }
+    }
+    
+    func secureAnyView(secure: Bool) -> AnyView{
+        if !secure{
+            return AnyView(TextField(placeHolderText ?? "", text: $text))
+        }
+        else{
+            return AnyView(SecureField(placeHolderText ?? "", text: $text))
         }
     }
 }
@@ -156,6 +164,11 @@ extension CustomTextField{
         copy.secureTextImageOpen = open
         copy.secureTextImageClose = close
         copy._trailingImage = State(initialValue: copy.secureTextImageClose)
+        return copy
+    }
+    func setMaxCount(_ count: Int) -> Self{
+        var copy = self
+        copy.maxCount = count
         return copy
     }
 }
