@@ -28,7 +28,8 @@ struct CustomTextField: View {
     var secureTextImageClose : Image? = Image(systemName: "eye.slash.fill")
     var maxCount: Int = 0
     var truncationMode: Text.TruncationMode?
-
+    var borderColor: Color?
+    
     var body: some View{
         VStack{
             //Title
@@ -41,7 +42,7 @@ struct CustomTextField: View {
             }
             //TextField
             HStack(spacing: 0){
-                secureAnyView(secure: secureText)
+                secureAnyView()
                     .frame(maxWidth: .infinity)
                     .disabled(disable?.wrappedValue ?? false)
                     .padding([.leading, .trailing], 12)
@@ -69,7 +70,7 @@ struct CustomTextField: View {
                     .disabled(disable?.wrappedValue ?? false)
             }.background(
                 RoundedRectangle(cornerRadius: 5.0)
-                    .stroke(error?.wrappedValue ?? false ? errorTextColor! : Color.black)
+                    .stroke(getBorderColor())
                     .background(
                         (disable?.wrappedValue ?? false ? disableColor : Color.clear)
                         .cornerRadius(5.0)
@@ -89,12 +90,23 @@ struct CustomTextField: View {
         }
     }
     
-    func secureAnyView(secure: Bool) -> AnyView{
-        if !secure{
+    func secureAnyView() -> AnyView{
+        if !secureText{
             return AnyView(TextField(placeHolderText ?? "", text: $text))
         }
         else{
             return AnyView(SecureField(placeHolderText ?? "", text: $text))
+        }
+    }
+    
+    func getBorderColor() -> Color{
+        //If you set border color error will not be active
+        // border color is primary.
+        if let borderColor{
+            return borderColor
+        }
+        else{
+            return error?.wrappedValue ?? false ? errorTextColor! : Color.black
         }
     }
 }
@@ -176,6 +188,11 @@ extension CustomTextField{
     func setTruncateMode(_ mode: Text.TruncationMode?) -> Self{
         var copy = self
         copy.truncationMode = mode ?? .tail
+        return copy
+    }
+    func setBorderColor(_ color: Color?) -> Self{
+        var copy = self
+        copy.borderColor = color
         return copy
     }
 }

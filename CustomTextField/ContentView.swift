@@ -9,12 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var text = "esat1feyk23mqjyefycrfk862x78cyk2sy9l0t8rt6c"
+    @State var text = "Esat Gozcu"
 
     var body: some View {
         VStack {
             CustomTextField(text: $text)
-                .setTruncateMode(.middle)
+                .setBorderColor(.orange)
         }
         .padding()
     }
