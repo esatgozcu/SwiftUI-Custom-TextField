@@ -5,8 +5,6 @@
 //  Created by Esat Gözcü on 2023/03/30.
 //
 
-import SwiftUI
-
 @available(iOS 13.0, *)
 public struct CustomTextField: View {
     
@@ -32,7 +30,9 @@ public struct CustomTextField: View {
     var maxCount: Int?
     var truncationMode: Text.TruncationMode?
     var borderColor: Color?
-    
+    var borderWidth: CGFloat?
+    var backgroundColor: Color?
+
     public init(text: Binding<String>,
                 textColor: Color? = .black,
                 titleText: String? = nil,
@@ -54,7 +54,9 @@ public struct CustomTextField: View {
                 secureTextImageClose: Image? = Image(systemName: "eye.slash.fill"),
                 maxCount: Int = 0,
                 truncationMode: Text.TruncationMode? = nil,
-                borderColor: Color? = nil
+                borderColor: Color? = nil,
+                borderWidth: CGFloat? = 1.0,
+                backgroundColor: Color? = .clear
     ) {
         self.text = text
         self.textColor = textColor
@@ -78,6 +80,8 @@ public struct CustomTextField: View {
         self.maxCount = maxCount
         self.truncationMode = truncationMode
         self.borderColor = borderColor
+        self.borderWidth = borderWidth
+        self.backgroundColor = backgroundColor
     }
     
     public var body: some View{
@@ -124,10 +128,9 @@ public struct CustomTextField: View {
                     .disabled(disable?.wrappedValue ?? false)
             }.background(
                 RoundedRectangle(cornerRadius: 5.0)
-                    .stroke(getBorderColor())
+                    .stroke(getBorderColor(), lineWidth: borderWidth ?? 1.0)
                     .background(
-                        (disable?.wrappedValue ?? false ? disableColor : Color.clear)
-                        .cornerRadius(5.0)
+                        (disable?.wrappedValue ?? false ? disableColor : backgroundColor).cornerRadius(5.0)
                     )
             )
             //Bottom text
@@ -255,6 +258,16 @@ extension CustomTextField{
     public func setBorderColor(_ color: Color?) -> Self{
         var copy = self
         copy.borderColor = color
+        return copy
+    }
+    public func setBorderWidth(_ width: CGFloat?) -> Self{
+        var copy = self
+        copy.borderWidth = width
+        return copy
+    }
+    public func setBackgroundColor(_ color: Color?) -> Self{
+        var copy = self
+        copy.backgroundColor = color
         return copy
     }
 }
