@@ -147,13 +147,14 @@ CustomTextField(text: $text)
 
 <img width="436" alt="Truncation Mode" src="https://user-images.githubusercontent.com/35576161/228734064-981156ab-daba-4ee5-b2ed-c951fc11e476.png">
 
-#### Border Color
+#### Border Color and Width
 
 ```swift
 @State var text = "Esat Gozcu"
 
 CustomTextField(text: $text)
                 .setBorderColor(.orange)
+                .setBorderWidth(1.0)
 ```
 
 <img width="436" alt="Border Color" src="https://user-images.githubusercontent.com/35576161/228738468-6ef33d39-79b5-4040-a890-48c97bce218a.png">
@@ -168,3 +169,15 @@ CustomTextField(text: $text)
 ```
 
 <img width="436" alt="Text Color" src="https://user-images.githubusercontent.com/35576161/228739233-9d3c63e1-d671-448a-bfbe-eb264e9c42a4.png">
+
+#### Background Color
+
+```swift
+@State var text = "Esat Gozcu"
+
+CustomTextField(text: $text)
+            .setBackgroundColor(Color.black)
+            .setTextColor(Color.white)
+```
+
+<img width="436" alt="Background Color" src="https://user-images.githubusercontent.com/35576161/229054807-49ac1499-a434-4ef4-8f7e-5d048dbdafda.png">
