@@ -10,34 +10,34 @@ import SwiftUI
 @available(iOS 13.0, *)
 public struct CustomTextField: View {
 
-    public var text: Binding<String>
-    public var disable: Binding<Bool>?
-    public var error: Binding<Bool>?
-    public var errorText: Binding<String>?
-    @State public var trailingImage : Image?
-    @State public var secureText = false
+    private var text: Binding<String>
+    private var disable: Binding<Bool>?
+    private var error: Binding<Bool>?
+    private var errorText: Binding<String>?
+    @State private var trailingImage : Image?
+    @State private var secureText = false
 
-    public var textColor: Color? = .black
-    public var titleText: String?
-    public var titleColor: Color? = .black
-    public var titleFont: Font? = .callout
-    public var placeHolderText: String = ""
-    public var placeHolderTextColor: Color? = .gray.opacity(0.8)
-    public var disableColor: Color? = .gray.opacity(0.5)
-    public var errorTextColor: Color = .red
-    public var errorFont: Font? = .footnote
-    public var trailingImageClick: (() -> Void)?
-    public var isSecureText: Bool = false
-    public var secureTextImageOpen : Image? = Image(systemName: "eye.fill")
-    public var secureTextImageClose : Image? = Image(systemName: "eye.slash.fill")
-    public var maxCount: Int?
-    public var truncationMode: Text.TruncationMode = Text.TruncationMode.tail
-    public var borderColor: Color? = .black
-    public var borderWidth: CGFloat = 1.0
-    public var backgroundColor: Color? = .clear
-    public var cornerRadius : CGFloat = 5.0
+    private var textColor: Color? = .black
+    private var titleText: String?
+    private var titleColor: Color? = .black
+    private var titleFont: Font? = .callout
+    private var placeHolderText: String = ""
+    private var placeHolderTextColor: Color? = .gray.opacity(0.8)
+    private var disableColor: Color? = .gray.opacity(0.5)
+    private var errorTextColor: Color = .red
+    private var errorFont: Font? = .footnote
+    private var trailingImageClick: (() -> Void)?
+    private var isSecureText: Bool = false
+    private var secureTextImageOpen : Image? = Image(systemName: "eye.fill")
+    private var secureTextImageClose : Image? = Image(systemName: "eye.slash.fill")
+    private var maxCount: Int?
+    private var truncationMode: Text.TruncationMode = Text.TruncationMode.tail
+    private var borderColor: Color? = .black
+    private var borderWidth: CGFloat = 1.0
+    private var backgroundColor: Color? = .clear
+    private var cornerRadius : CGFloat = 5.0
     
-    init(text: Binding<String>) {
+    public init(text: Binding<String>) {
         self.text = text
     }
     
