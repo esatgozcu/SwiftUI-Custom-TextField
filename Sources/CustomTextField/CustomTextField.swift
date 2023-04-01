@@ -5,91 +5,48 @@
 //  Created by Esat Gözcü on 2023/03/30.
 //
 
+import SwiftUI
+
 @available(iOS 13.0, *)
 public struct CustomTextField: View {
-    
-    var text: Binding<String>
-    var textColor: Color?
-    var titleText: String?
-    var titleColor: Color?
-    var titleFont: Font?
-    var placeHolderText: String?
-    var placeHolderTextColor: Color?
-    var disable: Binding<Bool>?
-    var disableColor: Color?
-    var error: Binding<Bool>?
-    var errorText: Binding<String>?
-    var errorTextColor: Color?
-    var errorFont: Font?
-    @State var trailingImage : Image?
-    var trailingImageClick: (() -> Void)?
-    @State var secureText = false
-    var isSecureText: Bool = false
-    var secureTextImageOpen : Image?
-    var secureTextImageClose : Image?
-    var maxCount: Int?
-    var truncationMode: Text.TruncationMode?
-    var borderColor: Color?
-    var borderWidth: CGFloat?
-    var backgroundColor: Color?
 
-    public init(text: Binding<String>,
-                textColor: Color? = .black,
-                titleText: String? = nil,
-                titleColor: Color? = .black,
-                titleFont: Font? = nil,
-                placeHolderText: String? = nil,
-                placeHolderTextColor: Color? = nil,
-                disable: Binding<Bool>? = nil,
-                disableColor: Color? = .gray.opacity(0.5),
-                error: Binding<Bool>? = nil,
-                errorText: Binding<String>? = nil,
-                errorTextColor: Color? = .red,
-                errorFont: Font? = nil,
-                trailingImage: Image? = nil,
-                trailingImageClick: (() -> Void)? = nil,
-                secureText: Bool = false,
-                isSecureText: Bool = false,
-                secureTextImageOpen: Image? = Image(systemName: "eye.fill"),
-                secureTextImageClose: Image? = Image(systemName: "eye.slash.fill"),
-                maxCount: Int = 0,
-                truncationMode: Text.TruncationMode? = nil,
-                borderColor: Color? = nil,
-                borderWidth: CGFloat? = 1.0,
-                backgroundColor: Color? = .clear
-    ) {
+    private var text: Binding<String>
+    private var disable: Binding<Bool>?
+    private var error: Binding<Bool>?
+    private var errorText: Binding<String>?
+    @State private var trailingImage : Image?
+    @State private var secureText = false
+
+    private var textColor: Color? = .black
+    private var titleText: String?
+    private var titleColor: Color? = .black
+    private var titleFont: Font? = .callout
+    private var placeHolderText: String = ""
+    private var placeHolderTextColor: Color? = .gray.opacity(0.8)
+    private var disableColor: Color? = .gray.opacity(0.5)
+    private var errorTextColor: Color = .red
+    private var errorFont: Font? = .footnote
+    private var trailingImageClick: (() -> Void)?
+    private var isSecureText: Bool = false
+    private var secureTextImageOpen : Image? = Image(systemName: "eye.fill")
+    private var secureTextImageClose : Image? = Image(systemName: "eye.slash.fill")
+    private var maxCount: Int?
+    private var truncationMode: Text.TruncationMode = Text.TruncationMode.tail
+    private var borderColor: Color? = .black
+    private var borderWidth: CGFloat = 1.0
+    private var backgroundColor: Color? = .clear
+    private var cornerRadius : CGFloat = 5.0
+    
+    init(text: Binding<String>) {
         self.text = text
-        self.textColor = textColor
-        self.titleText = titleText
-        self.titleColor = titleColor
-        self.titleFont = titleFont
-        self.placeHolderText = placeHolderText
-        self.placeHolderTextColor = placeHolderTextColor
-        self.disable = disable
-        self.disableColor = disableColor
-        self.error = error
-        self.errorText = errorText
-        self.errorTextColor = errorTextColor
-        self.errorFont = errorFont
-        self.trailingImage = trailingImage
-        self.trailingImageClick = trailingImageClick
-        self.secureText = secureText
-        self.isSecureText = isSecureText
-        self.secureTextImageOpen = secureTextImageOpen
-        self.secureTextImageClose = secureTextImageClose
-        self.maxCount = maxCount
-        self.truncationMode = truncationMode
-        self.borderColor = borderColor
-        self.borderWidth = borderWidth
-        self.backgroundColor = backgroundColor
     }
     
     public var body: some View{
         VStack(spacing: 5){
             //Title
-            if titleText != nil{
-                Text(titleText ?? "")
-                    .font(titleFont ?? .callout)
+            if let titleText{
+                Text(titleText)
+                    .font(titleFont)
                     .foregroundColor(titleColor)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
@@ -97,7 +54,7 @@ public struct CustomTextField: View {
             HStack(spacing: 0){
                 secureAnyView()
                     .placeholder(when: text.wrappedValue.isEmpty, placeholder: {
-                        Text(placeHolderText ?? "").foregroundColor(placeHolderTextColor)
+                        Text(placeHolderText).foregroundColor(placeHolderTextColor)
                     })
                     .frame(maxWidth: .infinity)
                     .frame(height: 50)
@@ -105,12 +62,14 @@ public struct CustomTextField: View {
                     .disabled(disable?.wrappedValue ?? false)
                     .padding([.leading, .trailing], 12)
                     .onReceive(text.wrappedValue.publisher.collect()) {
-                        let s = String($0.prefix(maxCount ?? 0))
-                        if text.wrappedValue != s && (maxCount != 0){
-                            text.wrappedValue = s
+                        if let maxCount{
+                            let s = String($0.prefix(maxCount))
+                            if text.wrappedValue != s && (maxCount != 0){
+                                text.wrappedValue = s
+                            }
                         }
                     }
-                    .truncationMode(truncationMode ?? Text.TruncationMode.tail)
+                    .truncationMode(truncationMode)
                 trailingImage?
                     .resizable()
                     .scaledToFit()
@@ -127,10 +86,10 @@ public struct CustomTextField: View {
                     }
                     .disabled(disable?.wrappedValue ?? false)
             }.background(
-                RoundedRectangle(cornerRadius: 5.0)
-                    .stroke(getBorderColor(), lineWidth: borderWidth ?? 1.0)
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .stroke(getBorderColor(), lineWidth: borderWidth)
                     .background(
-                        (disable?.wrappedValue ?? false ? disableColor : backgroundColor).cornerRadius(5.0)
+                        (disable?.wrappedValue ?? false ? disableColor : backgroundColor)?.cornerRadius(cornerRadius)
                     )
             )
             //Bottom text
@@ -161,71 +120,71 @@ public struct CustomTextField: View {
             return borderColor
         }
         else{
-            return error?.wrappedValue ?? false ? errorTextColor! : Color.black
+            return error?.wrappedValue ?? false ? errorTextColor : Color.black
         }
     }
 }
 @available(iOS 13.0, *)
 extension CustomTextField{
-    public func setTextColor(_ color: Color?) -> Self{
+    public func setTextColor(_ color: Color) -> Self{
         var copy = self
         copy.textColor = color
         return copy
     }
-    public func setTitleText(_ titleText: String?) -> Self{
+    public func setTitleText(_ titleText: String) -> Self{
         var copy = self
         copy.titleText = titleText
         return copy
     }
-    public func setTitleColor(_ titleColor: Color?) -> Self{
+    public func setTitleColor(_ titleColor: Color) -> Self{
         var copy = self
         copy.titleColor = titleColor
         return copy
     }
-    public func setTitleFont(_ titleFont: Font?) -> Self{
+    public func setTitleFont(_ titleFont: Font) -> Self{
         var copy = self
         copy.titleFont = titleFont
         return copy
     }
-    public func setPlaceHolderText(_ placeHolderText: String?) -> Self {
+    public func setPlaceHolderText(_ placeHolderText: String) -> Self {
         var copy = self
         copy.placeHolderText = placeHolderText
         return copy
     }
-    public func setPlaceHolderTextColor(_ color: Color?) -> Self{
+    public func setPlaceHolderTextColor(_ color: Color) -> Self{
         var copy = self
         copy.placeHolderTextColor = color
         return copy
     }
-    public func setDisable(_ disable: Binding<Bool>?) -> Self{
+    public func setDisable(_ disable: Binding<Bool>) -> Self{
         var copy = self
         copy.disable = disable
         return copy
     }
-    public func setDisableColor(_ color: Color?) -> Self{
+    public func setDisableColor(_ color: Color) -> Self{
         var copy = self
         copy.disableColor = color
         return copy
     }
-    public func setError(errorText: Binding<String>?, error: Binding<Bool>?) -> Self {
+    public func setError(errorText: Binding<String>, error: Binding<Bool>) -> Self {
         var copy = self
         copy.error = error
         copy.errorText = errorText
         return copy
     }
-    public func setErrorTextColor(_ color: Color?) -> Self{
+    public func setErrorTextColor(_ color: Color) -> Self{
         var copy = self
         copy.errorTextColor = color
         return copy
     }
-    public func setErrorFont(_ errorFont: Font?) -> Self{
+    public func setErrorFont(_ errorFont: Font) -> Self{
         var copy = self
         copy.errorFont = errorFont
         return copy
     }
-    public func setTrailingImage(_ image: Image?, click: @escaping (()->Void)) -> Self{
+    public func setTrailingImage(_ image: Image, click: @escaping (()->Void)) -> Self{
         var copy = self
-        copy._trailingImage = State(initialValue: image ?? Image(systemName: "xmark.octagon"))
+        copy._trailingImage = State(initialValue: image)
         copy.trailingImageClick = click
         return copy
     }
@@ -250,27 +209,33 @@ extension CustomTextField{
         copy.maxCount = count
         return copy
     }
-    public func setTruncateMode(_ mode: Text.TruncationMode?) -> Self{
+    public func setTruncateMode(_ mode: Text.TruncationMode) -> Self{
         var copy = self
-        copy.truncationMode = mode ?? .tail
+        copy.truncationMode = mode
         return copy
     }
-    public func setBorderColor(_ color: Color?) -> Self{
+    public func setBorderColor(_ color: Color) -> Self{
         var copy = self
         copy.borderColor = color
         return copy
     }
-    public func setBorderWidth(_ width: CGFloat?) -> Self{
+    public func setBorderWidth(_ width: CGFloat) -> Self{
         var copy = self
         copy.borderWidth = width
         return copy
     }
-    public func setBackgroundColor(_ color: Color?) -> Self{
+    public func setBackgroundColor(_ color: Color) -> Self{
         var copy = self
         copy.backgroundColor = color
         return copy
     }
+    public func setCornerRadius(_ radius: CGFloat) -> Self{
+        var copy = self
+        copy.cornerRadius = radius
+        return copy
+    }
 }
+
 @available(iOS 13.0, *)
 extension View {
     func placeholder<Content: View>(

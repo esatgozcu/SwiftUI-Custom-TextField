@@ -181,3 +181,14 @@ CustomTextField(text: $text)
 ```
 
 <img width="436" alt="Background Color" src="https://user-images.githubusercontent.com/35576161/229054807-49ac1499-a434-4ef4-8f7e-5d048dbdafda.png">
+
+#### Corner Radius
+
+```swift
+@State var text = "Esat Gozcu"
+
+CustomTextField(text: $text)
+            .setCornerRadius(20.0)
+```
+
+<img width="436" alt="Corner Radius" src="https://user-images.githubusercontent.com/35576161/229308516-32bd5bef-57da-4b41-b84c-551934f1f86a.png">
