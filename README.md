@@ -1,8 +1,21 @@
+<p align="center">
+    <img src ="https://user-images.githubusercontent.com/35576161/229371135-1bf75607-b02e-46e8-be75-3a4b2c573f45.svg" alt="Logo" title="EGTextField" width=600 />
+</p>
+
+<p align="center">
+    <img src="https://img.shields.io/badge/Swift-5.6-orange.svg" alt="Swift 5.6" />
+    <img src="https://img.shields.io/badge/licence-MIT-blue.svg?style=flat" alt="MIT License" />
+    <a href= "https://linkedin.com/in/esatgozcu">
+        <img src="https://img.shields.io/badge/contact-@esatgozcu-green.svg?style=flat" />
+    </a>
+</p>
+
 # SwiftUI Custom TextField
 
 This repository developed with only swiftUI, there is no UIViewRepresentable.
 
 #### Requirements
+
 - iOS 13.0+
 - Xcode 13+
 - Swift 5+
