@@ -257,3 +257,13 @@ EGTextField(text: $text)
 ```
 
 <img width="436" alt="Corner Radius" src="https://user-images.githubusercontent.com/35576161/229308516-32bd5bef-57da-4b41-b84c-551934f1f86a.png">
+
+
+#### Disable auto correction
+
+```swift
+@State var text = "Esat Gozcu"
+
+EGTextField(text: $text)
+             .setDisableAutoCorrection(true)
+```

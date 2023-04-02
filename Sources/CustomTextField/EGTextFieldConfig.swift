@@ -39,6 +39,7 @@ public class EGTextFieldConfig{
     public var borderWidth : CGFloat = 1.0
     public var cornerRadius : CGFloat = 5.0
     public var borderType: BorderType = .square
+    public var disableAutocorrection: Bool = false
 }
 
 public enum BorderType {
