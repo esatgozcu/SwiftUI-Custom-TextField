@@ -9,7 +9,7 @@ import SwiftUI
 
 @available(iOS 13.0, *)
 public class EGTextFieldConfig{
-    static var shared = EGTextFieldConfig()
+    public static var shared = EGTextFieldConfig()
     private init(){}
     
     //Text Color
