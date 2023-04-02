@@ -13,32 +13,32 @@ public class EGTextFieldConfig{
     private init(){}
     
     //Text Color
-    var defaultTextColor : Color = .black
-    var darkModeTextColor : Color = .white
+    public var defaultTextColor : Color = .black
+    public var darkModeTextColor : Color = .white
     //Title Color
-    var defaultTitleColor : Color = .black
-    var darkModeTitleColor : Color = .white
+    public var defaultTitleColor : Color = .black
+    public var darkModeTitleColor : Color = .white
     //PlaceHolder Text Color
-    var defaultPlaceHolderTextColor : Color = .gray.opacity(0.8)
-    var darkModePlaceHolderTextColor : Color = .white.opacity(0.3)
+    public var defaultPlaceHolderTextColor : Color = .gray.opacity(0.8)
+    public var darkModePlaceHolderTextColor : Color = .white.opacity(0.3)
     //Disable Color
-    var defaultDisableColor : Color = .gray.opacity(0.5)
-    var darkModeDisableColor : Color = .gray.opacity(0.3)
+    public var defaultDisableColor : Color = .gray.opacity(0.5)
+    public var darkModeDisableColor : Color = .gray.opacity(0.3)
     //Background Color
-    var defaultBackgroundColor : Color = .white
-    var darkModeBackgroundColor : Color = .black
+    public var defaultBackgroundColor : Color = .white
+    public var darkModeBackgroundColor : Color = .black
     //Error Text Color
-    var defaultErrorTextColor : Color = .red
-    var darkModeErrorTextColor : Color = .red
+    public var defaultErrorTextColor : Color = .red
+    public var darkModeErrorTextColor : Color = .red
     //Border Color
-    var defaultBorderColor : Color = .black
-    var darkModeBorderColor : Color = .white
+    public var defaultBorderColor : Color = .black
+    public var darkModeBorderColor : Color = .white
     //Default
-    var titleFont : Font = .callout
-    var errorFont : Font = .footnote
-    var borderWidth : CGFloat = 1.0
-    var cornerRadius : CGFloat = 5.0
-    var borderType: BorderType = .square
+    public var titleFont : Font = .callout
+    public var errorFont : Font = .footnote
+    public var borderWidth : CGFloat = 1.0
+    public var cornerRadius : CGFloat = 5.0
+    public var borderType: BorderType = .square
 }
 
 public enum BorderType {
