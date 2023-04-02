@@ -1,6 +1,6 @@
 //
-//  CustomTextField.swift
-//  CustomTextField
+//  EGTextField.swift
+//  EGTextField
 //
 //  Created by Esat Gözcü on 2023/03/30.
 //
@@ -8,23 +8,20 @@
 import SwiftUI
 
 @available(iOS 13.0, *)
-public struct CustomTextField: View {
-
+public struct EGTextField: View {
+    
+    @StateObject var vm = EGTextFieldConfig.shared
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
+    @State private var trailingImage : Image?
+    @State private var secureText = false
+    
     private var text: Binding<String>
     private var disable: Binding<Bool>?
     private var error: Binding<Bool>?
     private var errorText: Binding<String>?
-    @State private var trailingImage : Image?
-    @State private var secureText = false
-
-    private var textColor: Color? = .black
     private var titleText: String?
-    private var titleColor: Color? = .black
     private var titleFont: Font? = .callout
     private var placeHolderText: String = ""
-    private var placeHolderTextColor: Color? = .gray.opacity(0.8)
-    private var disableColor: Color? = .gray.opacity(0.5)
-    private var errorTextColor: Color = .red
     private var errorFont: Font? = .footnote
     private var trailingImageClick: (() -> Void)?
     private var isSecureText: Bool = false
@@ -32,9 +29,7 @@ public struct CustomTextField: View {
     private var secureTextImageClose : Image? = Image(systemName: "eye.slash.fill")
     private var maxCount: Int?
     private var truncationMode: Text.TruncationMode = Text.TruncationMode.tail
-    private var borderColor: Color? = .black
     private var borderWidth: CGFloat = 1.0
-    private var backgroundColor: Color? = .clear
     private var cornerRadius : CGFloat = 5.0
     
     public init(text: Binding<String>) {
@@ -47,18 +42,18 @@ public struct CustomTextField: View {
             if let titleText{
                 Text(titleText)
                     .font(titleFont)
-                    .foregroundColor(titleColor)
+                    .foregroundColor(getTitleTextColor())
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             //TextField
             HStack(spacing: 0){
                 secureAnyView()
                     .placeholder(when: text.wrappedValue.isEmpty, placeholder: {
-                        Text(placeHolderText).foregroundColor(placeHolderTextColor)
+                        Text(placeHolderText).foregroundColor(getPlaceHolderTextColor())
                     })
                     .frame(maxWidth: .infinity)
                     .frame(height: 50)
-                    .foregroundColor(textColor)
+                    .foregroundColor(getTextColor())
                     .disabled(disable?.wrappedValue ?? false)
                     .padding([.leading, .trailing], 12)
                     .onReceive(text.wrappedValue.publisher.collect()) {
@@ -70,6 +65,7 @@ public struct CustomTextField: View {
                         }
                     }
                     .truncationMode(truncationMode)
+                    .background(Color.clear)
                 trailingImage?
                     .resizable()
                     .scaledToFit()
@@ -88,22 +84,19 @@ public struct CustomTextField: View {
             }.background(
                 RoundedRectangle(cornerRadius: cornerRadius)
                     .stroke(getBorderColor(), lineWidth: borderWidth)
-                    .background(
-                        (disable?.wrappedValue ?? false ? disableColor : backgroundColor)?.cornerRadius(cornerRadius)
-                    )
+                    .background(getBackgroundColor().cornerRadius(cornerRadius))
             )
             //Bottom text
             if let error = error?.wrappedValue{
                 if error{
                     Text(errorText?.wrappedValue ?? "")
                         .font(errorFont ?? .footnote)
-                        .foregroundColor(errorTextColor)
+                        .foregroundColor(getErrorTextColor())
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
         }
     }
-    
     func secureAnyView() -> AnyView{
         if !secureText{
             return AnyView(TextField("", text: text))
@@ -112,23 +105,41 @@ public struct CustomTextField: View {
             return AnyView(SecureField("", text: text))
         }
     }
-    
     func getBorderColor() -> Color{
-        //If you set border color error will not be active
-        // border color is primary.
-        if let borderColor{
-            return borderColor
+        if error?.wrappedValue ?? false {
+            return getErrorTextColor()
         }
         else{
-            return error?.wrappedValue ?? false ? errorTextColor : Color.black
+            return colorScheme == .light ? vm.defaultBorderColor : vm.darkModeBorderColor
         }
     }
+    func getBackgroundColor() -> Color{
+        if disable?.wrappedValue ?? false{
+            return colorScheme == .light ? vm.defaultDisableColor : vm.darkModeDisableColor
+        }
+        else{
+            return colorScheme == .light ? vm.defaultBackgroundColor : vm.darkModeBackgroundColor
+        }
+    }
+    func getTextColor() -> Color{
+        return colorScheme == .light ? vm.defaultTextColor : vm.darkModeTextColor
+    }
+    func getErrorTextColor() -> Color{
+        return colorScheme == .light ? vm.defaultErrorTextColor : vm.darkModeErrorTextColor
+    }
+    func getPlaceHolderTextColor() -> Color{
+        return colorScheme == .light ? vm.defaultPlaceHolderTextColor : vm.darkModePlaceHolderTextColor
+    }
+    func getTitleTextColor() -> Color{
+        return colorScheme == .light ? vm.defaultTitleColor : vm.darkModeTitleColor
+    }
 }
+
 @available(iOS 13.0, *)
-extension CustomTextField{
+extension EGTextField{
     public func setTextColor(_ color: Color) -> Self{
-        var copy = self
-        copy.textColor = color
+        let copy = self
+        copy.vm.defaultTextColor = color
         return copy
     }
     public func setTitleText(_ titleText: String) -> Self{
@@ -137,8 +148,8 @@ extension CustomTextField{
         return copy
     }
     public func setTitleColor(_ titleColor: Color) -> Self{
-        var copy = self
-        copy.titleColor = titleColor
+        let copy = self
+        copy.vm.defaultTitleColor = titleColor
         return copy
     }
     public func setTitleFont(_ titleFont: Font) -> Self{
@@ -152,8 +163,8 @@ extension CustomTextField{
         return copy
     }
     public func setPlaceHolderTextColor(_ color: Color) -> Self{
-        var copy = self
-        copy.placeHolderTextColor = color
+        let copy = self
+        copy.vm.defaultPlaceHolderTextColor = color
         return copy
     }
     public func setDisable(_ disable: Binding<Bool>) -> Self{
@@ -162,8 +173,8 @@ extension CustomTextField{
         return copy
     }
     public func setDisableColor(_ color: Color) -> Self{
-        var copy = self
-        copy.disableColor = color
+        let copy = self
+        copy.vm.defaultDisableColor = color
         return copy
     }
     public func setError(errorText: Binding<String>, error: Binding<Bool>) -> Self {
@@ -173,8 +184,8 @@ extension CustomTextField{
         return copy
     }
     public func setErrorTextColor(_ color: Color) -> Self{
-        var copy = self
-        copy.errorTextColor = color
+        let copy = self
+        copy.vm.defaultErrorTextColor = color
         return copy
     }
     public func setErrorFont(_ errorFont: Font) -> Self{
@@ -215,8 +226,8 @@ extension CustomTextField{
         return copy
     }
     public func setBorderColor(_ color: Color) -> Self{
-        var copy = self
-        copy.borderColor = color
+        let copy = self
+        copy.vm.defaultBorderColor = color
         return copy
     }
     public func setBorderWidth(_ width: CGFloat) -> Self{
@@ -225,8 +236,8 @@ extension CustomTextField{
         return copy
     }
     public func setBackgroundColor(_ color: Color) -> Self{
-        var copy = self
-        copy.backgroundColor = color
+        let copy = self
+        copy.vm.defaultBackgroundColor = color
         return copy
     }
     public func setCornerRadius(_ radius: CGFloat) -> Self{

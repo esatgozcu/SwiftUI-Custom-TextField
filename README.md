@@ -15,6 +15,47 @@ CustomTextfield is available through [Swift Package Manager](https://swift.org/p
 .package(url: "https://github.com/esatgozcu/SwiftUI-Custom-TextField", from: "main")
 ```
 
+## Customize config
+
+You can set your [config](SwiftUI-Custom-TextField/Sources/EGTextFieldConfig.swift) properties in @main so you don't need to set every time.
+
+```Swift
+@main
+struct ExampleApp: App {
+    init() {
+        let shared = EGTextFieldConfig.shared
+        shared.defaultTextColor = .black
+        shared.darkModeTextColor = .white
+        shared.defaultTitleColor = .black
+        shared.darkModeTitleColor = .white
+        ...
+    }
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
+```
+
+## Dark Mode
+
+Dark mode ability is available. You don't need to consider this issue. If you want to change default color you can set in [config](https://github.com/esatgozcu/SwiftUI-Custom-TextField/edit/main/README.md#customize-config) file.
+
+#### Default initialize
+
+```swift
+@State var text = "Esat Gozcu"
+
+EGTextField(text: $text)
+                .setTitleText("Title")
+```
+#### Dark
+<img width="436" alt="Light Mode" src="https://user-images.githubusercontent.com/35576161/229367808-3a6649ad-bc3b-489b-9b2d-69918f9cc0af.png">
+
+#### Light
+<img width="436" alt="Dark Mode" src="https://user-images.githubusercontent.com/35576161/229367802-2e7e209e-531a-46cd-b81f-c1aa1750881b.png">
+
 ## Examples
 
 #### Default
@@ -22,7 +63,7 @@ CustomTextfield is available through [Swift Package Manager](https://swift.org/p
 ```swift
 @State var text = "Esat Gozcu"
 
-CustomTextField(text: $text)
+EGTextField(text: $text)
 ```
 
 <img width="436" alt="Default" src="https://user-images.githubusercontent.com/35576161/228702554-e2f74f8f-3f08-4903-a557-1a9bbb827315.png">
@@ -32,7 +73,7 @@ CustomTextField(text: $text)
 ```swift
 @State var text = "Esat Gozcu"
 
-CustomTextField(text: $text)
+EGTextField(text: $text)
                 .setTitleText("Name")
                 .setTitleColor(.blue)
                 .setTitleFont(.body)
@@ -45,7 +86,7 @@ CustomTextField(text: $text)
 ```swift
 @State var text = ""
 
-CustomTextField(text: $text)
+EGTextField(text: $text)
                 .setPlaceHolderText("Enter a name")
 ```
 
@@ -56,7 +97,7 @@ Also if you want you can change placeholder color
 ```swift
 @State var text = ""
 
-CustomTextField(text: $text)
+EGTextField(text: $text)
                 .setPlaceHolderText("Enter a name")
                 .setPlaceHolderTextColor(Color.gray)
 ```
@@ -67,7 +108,7 @@ CustomTextField(text: $text)
 @State var text = "Esat Gozcu"
 @State var disable = true
 
-CustomTextField(text: $text)
+EGTextField(text: $text)
                 .setDisable($disable)
                 .setDisableColor(Color.gray.opacity(0.2))
 ```
@@ -82,7 +123,7 @@ CustomTextField(text: $text)
 @State var error = true
 @State var errorText = "Your name is not matched"
 
-CustomTextField(text: $text)
+EGTextField(text: $text)
                 .setError(errorText: $errorText, error: $error)
 ```
 
@@ -94,7 +135,7 @@ CustomTextField(text: $text)
 ```swift
 @State var text = "Esat Gozcu"
 
-CustomTextField(text: $text)
+EGTextField(text: $text)
                 .setTrailingImage(Image(systemName: "qrcode"), click: {
                     print("qr image tapped")
                 })
@@ -107,7 +148,7 @@ CustomTextField(text: $text)
 ```swift
 @State var text = "Esat Gozcu"
 
-CustomTextField(text: $text)
+EGTextField(text: $text)
                .setSecureText(true)
 ```
 
@@ -119,7 +160,7 @@ Secure text images can be changed
 ```swift
 @State var text = "Esat Gozcu"
 
-CustomTextField(text: $text)
+EGTextField(text: $text)
                 .setSecureText(true)
                 .setSecureTextImages(open : Image(systemName: "eye.fill"),
                                      close: Image(systemName: "eye.slash.fill"))
@@ -130,7 +171,7 @@ CustomTextField(text: $text)
 ```swift
 @State var text = "Esat Gozcu"
 
-CustomTextField(text: $text)
+EGTextField(text: $text)
                 .setMaxCount(8)
 ```
 
@@ -141,7 +182,7 @@ CustomTextField(text: $text)
 ```swift
 @State var text = "esat1feyk23mqjyefycrfk862x78cyk2sy9l0t8rt6c"
 
-CustomTextField(text: $text)
+EGTextField(text: $text)
                 .setTruncateMode(.middle)
 ```
 
@@ -152,7 +193,7 @@ CustomTextField(text: $text)
 ```swift
 @State var text = "Esat Gozcu"
 
-CustomTextField(text: $text)
+EGTextField(text: $text)
                 .setBorderColor(.orange)
                 .setBorderWidth(1.0)
 ```
@@ -164,7 +205,7 @@ CustomTextField(text: $text)
 ```swift
 @State var text = "Esat Gozcu"
 
-CustomTextField(text: $text)
+EGTextField(text: $text)
                 .setTextColor(.blue)
 ```
 
@@ -175,7 +216,7 @@ CustomTextField(text: $text)
 ```swift
 @State var text = "Esat Gozcu"
 
-CustomTextField(text: $text)
+EGTextField(text: $text)
             .setBackgroundColor(Color.black)
             .setTextColor(Color.white)
 ```
@@ -187,7 +228,7 @@ CustomTextField(text: $text)
 ```swift
 @State var text = "Esat Gozcu"
 
-CustomTextField(text: $text)
+EGTextField(text: $text)
             .setCornerRadius(20.0)
 ```
 
