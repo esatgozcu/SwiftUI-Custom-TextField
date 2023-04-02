@@ -17,7 +17,7 @@ CustomTextfield is available through [Swift Package Manager](https://swift.org/p
 
 ## Customize config
 
-You can set your [config](SwiftUI-Custom-TextField/Sources/EGTextFieldConfig.swift) properties in @main so you don't need to set every time.
+You can set your [config](Sources/CustomTextField/EGTextFieldConfig.swift) properties in @main so you don't need to set every time.
 
 ```Swift
 @main
