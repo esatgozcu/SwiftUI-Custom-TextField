@@ -10,27 +10,47 @@ import SwiftUI
 @available(iOS 13.0, *)
 public struct EGTextField: View {
     
-    @StateObject var vm = EGTextFieldConfig.shared
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @State private var trailingImage : Image?
     @State private var secureText = false
-    
     private var text: Binding<String>
     private var disable: Binding<Bool>?
     private var error: Binding<Bool>?
     private var errorText: Binding<String>?
-    private var titleText: String?
-    private var titleFont: Font? = .callout
-    private var placeHolderText: String = ""
-    private var errorFont: Font? = .footnote
-    private var trailingImageClick: (() -> Void)?
     private var isSecureText: Bool = false
+    private var titleText: String?
+    private var placeHolderText: String = ""
+    private var trailingImageClick: (() -> Void)?
     private var secureTextImageOpen : Image? = Image(systemName: "eye.fill")
     private var secureTextImageClose : Image? = Image(systemName: "eye.slash.fill")
     private var maxCount: Int?
     private var truncationMode: Text.TruncationMode = Text.TruncationMode.tail
-    private var borderWidth: CGFloat = 1.0
-    private var cornerRadius : CGFloat = 5.0
+    //Text Color
+    private var defaultTextColor = EGTextFieldConfig.shared.defaultTextColor
+    private var darkModeTextColor = EGTextFieldConfig.shared.darkModeTextColor
+    //Title Color
+    private var defaultTitleColor = EGTextFieldConfig.shared.defaultTitleColor
+    private var darkModeTitleColor = EGTextFieldConfig.shared.darkModeTitleColor
+    //PlaceHolder Text Color
+    private var defaultPlaceHolderTextColor = EGTextFieldConfig.shared.defaultPlaceHolderTextColor
+    private var darkModePlaceHolderTextColor = EGTextFieldConfig.shared.darkModePlaceHolderTextColor
+    //Disable Color
+    private var defaultDisableColor = EGTextFieldConfig.shared.defaultDisableColor
+    private var darkModeDisableColor = EGTextFieldConfig.shared.darkModeDisableColor
+    //Background Color
+    private var defaultBackgroundColor = EGTextFieldConfig.shared.defaultBackgroundColor
+    private var darkModeBackgroundColor = EGTextFieldConfig.shared.darkModeBackgroundColor
+    //Error Text Color
+    private var defaultErrorTextColor = EGTextFieldConfig.shared.defaultErrorTextColor
+    private var darkModeErrorTextColor = EGTextFieldConfig.shared.darkModeErrorTextColor
+    //Border Color
+    private var defaultBorderColor = EGTextFieldConfig.shared.defaultBorderColor
+    private var darkModeBorderColor = EGTextFieldConfig.shared.darkModeBorderColor
+    //Default
+    private var titleFont = EGTextFieldConfig.shared.titleFont
+    private var errorFont = EGTextFieldConfig.shared.errorFont
+    private var borderWidth = EGTextFieldConfig.shared.borderWidth
+    private var cornerRadius = EGTextFieldConfig.shared.cornerRadius
     
     public init(text: Binding<String>) {
         self.text = text
@@ -90,7 +110,7 @@ public struct EGTextField: View {
             if let error = error?.wrappedValue{
                 if error{
                     Text(errorText?.wrappedValue ?? "")
-                        .font(errorFont ?? .footnote)
+                        .font(errorFont)
                         .foregroundColor(getErrorTextColor())
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
@@ -110,36 +130,41 @@ public struct EGTextField: View {
             return getErrorTextColor()
         }
         else{
-            return colorScheme == .light ? vm.defaultBorderColor : vm.darkModeBorderColor
+            return colorScheme == .light ? defaultBorderColor : darkModeBorderColor
         }
     }
     func getBackgroundColor() -> Color{
         if disable?.wrappedValue ?? false{
-            return colorScheme == .light ? vm.defaultDisableColor : vm.darkModeDisableColor
+            return colorScheme == .light ? defaultDisableColor : darkModeDisableColor
         }
         else{
-            return colorScheme == .light ? vm.defaultBackgroundColor : vm.darkModeBackgroundColor
+            return colorScheme == .light ? defaultBackgroundColor : darkModeBackgroundColor
         }
     }
     func getTextColor() -> Color{
-        return colorScheme == .light ? vm.defaultTextColor : vm.darkModeTextColor
+        return colorScheme == .light ? defaultTextColor : darkModeTextColor
     }
     func getErrorTextColor() -> Color{
-        return colorScheme == .light ? vm.defaultErrorTextColor : vm.darkModeErrorTextColor
+        return colorScheme == .light ? defaultErrorTextColor : darkModeErrorTextColor
     }
     func getPlaceHolderTextColor() -> Color{
-        return colorScheme == .light ? vm.defaultPlaceHolderTextColor : vm.darkModePlaceHolderTextColor
+        return colorScheme == .light ? defaultPlaceHolderTextColor : darkModePlaceHolderTextColor
     }
     func getTitleTextColor() -> Color{
-        return colorScheme == .light ? vm.defaultTitleColor : vm.darkModeTitleColor
+        return colorScheme == .light ? defaultTitleColor : darkModeTitleColor
     }
 }
 
 @available(iOS 13.0, *)
 extension EGTextField{
     public func setTextColor(_ color: Color) -> Self{
-        let copy = self
-        copy.vm.defaultTextColor = color
+        var copy = self
+        copy.defaultTextColor = color
+        return copy
+    }
+    public func setDarkModeTextColor(_ color: Color) -> Self{
+        var copy = self
+        copy.darkModeTextColor = color
         return copy
     }
     public func setTitleText(_ titleText: String) -> Self{
@@ -148,8 +173,13 @@ extension EGTextField{
         return copy
     }
     public func setTitleColor(_ titleColor: Color) -> Self{
-        let copy = self
-        copy.vm.defaultTitleColor = titleColor
+        var copy = self
+        copy.defaultTitleColor = titleColor
+        return copy
+    }
+    public func setDarkModeTitleColor(_ titleColor: Color) -> Self{
+        var copy = self
+        copy.darkModeTitleColor = titleColor
         return copy
     }
     public func setTitleFont(_ titleFont: Font) -> Self{
@@ -163,8 +193,13 @@ extension EGTextField{
         return copy
     }
     public func setPlaceHolderTextColor(_ color: Color) -> Self{
-        let copy = self
-        copy.vm.defaultPlaceHolderTextColor = color
+        var copy = self
+        copy.defaultPlaceHolderTextColor = color
+        return copy
+    }
+    public func setDarkModePlaceHolderTextColor(_ color: Color) -> Self{
+        var copy = self
+        copy.darkModePlaceHolderTextColor = color
         return copy
     }
     public func setDisable(_ disable: Binding<Bool>) -> Self{
@@ -173,8 +208,13 @@ extension EGTextField{
         return copy
     }
     public func setDisableColor(_ color: Color) -> Self{
-        let copy = self
-        copy.vm.defaultDisableColor = color
+        var copy = self
+        copy.defaultDisableColor = color
+        return copy
+    }
+    public func setDarkModeDisableColor(_ color: Color) -> Self{
+        var copy = self
+        copy.darkModeDisableColor = color
         return copy
     }
     public func setError(errorText: Binding<String>, error: Binding<Bool>) -> Self {
@@ -184,8 +224,13 @@ extension EGTextField{
         return copy
     }
     public func setErrorTextColor(_ color: Color) -> Self{
-        let copy = self
-        copy.vm.defaultErrorTextColor = color
+        var copy = self
+        copy.defaultErrorTextColor = color
+        return copy
+    }
+    public func setDarkModeErrorTextColor(_ color: Color) -> Self{
+        var copy = self
+        copy.darkModeErrorTextColor = color
         return copy
     }
     public func setErrorFont(_ errorFont: Font) -> Self{
@@ -226,8 +271,13 @@ extension EGTextField{
         return copy
     }
     public func setBorderColor(_ color: Color) -> Self{
-        let copy = self
-        copy.vm.defaultBorderColor = color
+        var copy = self
+        copy.defaultBorderColor = color
+        return copy
+    }
+    public func setDarkModeBorderColor(_ color: Color) -> Self{
+        var copy = self
+        copy.darkModeBorderColor = color
         return copy
     }
     public func setBorderWidth(_ width: CGFloat) -> Self{
@@ -236,8 +286,13 @@ extension EGTextField{
         return copy
     }
     public func setBackgroundColor(_ color: Color) -> Self{
-        let copy = self
-        copy.vm.defaultBackgroundColor = color
+        var copy = self
+        copy.defaultBackgroundColor = color
+        return copy
+    }
+    public func setDarkModeBackgroundColor(_ color: Color) -> Self{
+        var copy = self
+        copy.darkModeBackgroundColor = color
         return copy
     }
     public func setCornerRadius(_ radius: CGFloat) -> Self{

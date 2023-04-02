@@ -8,29 +8,34 @@
 import SwiftUI
 
 @available(iOS 13.0, *)
-public class EGTextFieldConfig: ObservableObject{
+public class EGTextFieldConfig{
     static var shared = EGTextFieldConfig()
     private init(){}
     
     //Text Color
-    @Published var defaultTextColor : Color = .black
-    @Published var darkModeTextColor : Color = .white
+    var defaultTextColor : Color = .black
+    var darkModeTextColor : Color = .white
     //Title Color
-    @Published var defaultTitleColor : Color = .black
-    @Published var darkModeTitleColor : Color = .white
+    var defaultTitleColor : Color = .black
+    var darkModeTitleColor : Color = .white
     //PlaceHolder Text Color
-    @Published var defaultPlaceHolderTextColor : Color = .gray.opacity(0.8)
-    @Published var darkModePlaceHolderTextColor : Color = .white.opacity(0.3)
+    var defaultPlaceHolderTextColor : Color = .gray.opacity(0.8)
+    var darkModePlaceHolderTextColor : Color = .white.opacity(0.3)
     //Disable Color
-    @Published var defaultDisableColor : Color = .gray.opacity(0.5)
-    @Published var darkModeDisableColor : Color = .gray.opacity(0.3)
+    var defaultDisableColor : Color = .gray.opacity(0.5)
+    var darkModeDisableColor : Color = .gray.opacity(0.3)
     //Background Color
-    @Published var defaultBackgroundColor : Color = .white
-    @Published var darkModeBackgroundColor : Color = .black
+    var defaultBackgroundColor : Color = .white
+    var darkModeBackgroundColor : Color = .black
     //Error Text Color
-    @Published var defaultErrorTextColor : Color = .red
-    @Published var darkModeErrorTextColor : Color = .red
+    var defaultErrorTextColor : Color = .red
+    var darkModeErrorTextColor : Color = .red
     //Border Color
-    @Published var defaultBorderColor : Color = .black
-    @Published var darkModeBorderColor : Color = .white
+    var defaultBorderColor : Color = .black
+    var darkModeBorderColor : Color = .white
+    //Default
+    var titleFont : Font = .callout
+    var errorFont : Font = .footnote
+    var borderWidth : CGFloat = 1.0
+    var cornerRadius : CGFloat = 5.0
 }
