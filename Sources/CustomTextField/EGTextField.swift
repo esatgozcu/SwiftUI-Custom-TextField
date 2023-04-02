@@ -52,7 +52,7 @@ public struct EGTextField: View {
     private var borderWidth = EGTextFieldConfig.shared.borderWidth
     private var cornerRadius = EGTextFieldConfig.shared.cornerRadius
     private var borderType = EGTextFieldConfig.shared.borderType
-    private var disableAutocorrection = EGTextFieldConfig.shared.disableAutocorrection
+    private var disableAutoCorrection = EGTextFieldConfig.shared.disableAutoCorrection
 
     public init(text: Binding<String>) {
         self.text = text
@@ -79,7 +79,7 @@ public struct EGTextField: View {
                         .foregroundColor(getTextColor())
                         .disabled(disable?.wrappedValue ?? false)
                         .padding([.leading, .trailing], borderType == .square ? 12 : 1)
-                        .disableAutocorrection(disableAutocorrection)
+                        .disableAutocorrection(disableAutoCorrection)
                         .onReceive(text.wrappedValue.publisher.collect()) {
                             if let maxCount{
                                 let s = String($0.prefix(maxCount))
@@ -324,7 +324,7 @@ extension EGTextField{
     }
     public func setDisableAutoCorrection(_ disable: Bool) -> Self{
         var copy = self
-        copy.disableAutocorrection = disable
+        copy.disableAutoCorrection = disable
         return copy
     }
 }
