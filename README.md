@@ -53,7 +53,7 @@ struct ExampleApp: App {
 
 ## Dark Mode
 
-Dark mode ability is available. You don't need to consider this issue. If you want to change default color you can set in [config](https://github.com/esatgozcu/SwiftUI-Custom-TextField/edit/main/README.md#customize-config) file.
+Dark mode ability is available. You don't need to consider this issue. If you want to change default color you can set in [config](Sources/CustomTextField/EGTextFieldConfig.swift) file.
 
 #### Default initialize
 
