@@ -51,7 +51,8 @@ public struct EGTextField: View {
     private var errorFont = EGTextFieldConfig.shared.errorFont
     private var borderWidth = EGTextFieldConfig.shared.borderWidth
     private var cornerRadius = EGTextFieldConfig.shared.cornerRadius
-    
+    private var borderType = EGTextFieldConfig.shared.borderType
+
     public init(text: Binding<String>) {
         self.text = text
     }
@@ -65,47 +66,55 @@ public struct EGTextField: View {
                     .foregroundColor(getTitleTextColor())
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
-            //TextField
-            HStack(spacing: 0){
-                secureAnyView()
-                    .placeholder(when: text.wrappedValue.isEmpty, placeholder: {
-                        Text(placeHolderText).foregroundColor(getPlaceHolderTextColor())
-                    })
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 50)
-                    .foregroundColor(getTextColor())
-                    .disabled(disable?.wrappedValue ?? false)
-                    .padding([.leading, .trailing], 12)
-                    .onReceive(text.wrappedValue.publisher.collect()) {
-                        if let maxCount{
-                            let s = String($0.prefix(maxCount))
-                            if text.wrappedValue != s && (maxCount != 0){
-                                text.wrappedValue = s
+            VStack(spacing: 0){
+                //TextField
+                HStack(spacing: 0){
+                    secureAnyView()
+                        .placeholder(when: text.wrappedValue.isEmpty, placeholder: {
+                            Text(placeHolderText).foregroundColor(getPlaceHolderTextColor())
+                        })
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 50)
+                        .foregroundColor(getTextColor())
+                        .disabled(disable?.wrappedValue ?? false)
+                        .padding([.leading, .trailing], borderType == .square ? 12 : 1)
+                        .onReceive(text.wrappedValue.publisher.collect()) {
+                            if let maxCount{
+                                let s = String($0.prefix(maxCount))
+                                if text.wrappedValue != s && (maxCount != 0){
+                                    text.wrappedValue = s
+                                }
                             }
                         }
-                    }
-                    .truncationMode(truncationMode)
-                    .background(Color.clear)
-                trailingImage?
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 25, height: 25)
-                    .padding(.trailing, 12)
-                    .onTapGesture {
-                        if !isSecureText{
-                            trailingImageClick?()
+                        .truncationMode(truncationMode)
+                        .background(Color.clear)
+                    trailingImage?
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 25, height: 25)
+                        .padding(.trailing, 12)
+                        .onTapGesture {
+                            if !isSecureText{
+                                trailingImageClick?()
+                            }
+                            else{
+                                secureText.toggle()
+                                trailingImage = secureText ? secureTextImageClose : secureTextImageOpen
+                            }
                         }
-                        else{
-                            secureText.toggle()
-                            trailingImage = secureText ? secureTextImageClose : secureTextImageOpen
-                        }
-                    }
-                    .disabled(disable?.wrappedValue ?? false)
-            }.background(
-                RoundedRectangle(cornerRadius: cornerRadius)
-                    .stroke(getBorderColor(), lineWidth: borderWidth)
-                    .background(getBackgroundColor().cornerRadius(cornerRadius))
-            )
+                        .disabled(disable?.wrappedValue ?? false)
+                }.background(
+                    RoundedRectangle(cornerRadius: getCornerRadius())
+                        .stroke(getBorderColor(), lineWidth: getBorderWidth())
+                        .background(getBackgroundColor().cornerRadius(getCornerRadius()))
+                )
+                //Bottom Line
+                if borderType == .line{
+                    Rectangle()
+                        .frame(height: borderWidth)
+                        .foregroundColor(getBorderColor())
+                }
+            }
             //Bottom text
             if let error = error?.wrappedValue{
                 if error{
@@ -152,6 +161,12 @@ public struct EGTextField: View {
     }
     func getTitleTextColor() -> Color{
         return colorScheme == .light ? defaultTitleColor : darkModeTitleColor
+    }
+    func getBorderWidth() -> CGFloat{
+        return borderType == .square ? borderWidth : 0.0
+    }
+    func getCornerRadius() -> CGFloat{
+        return borderType == .square ? cornerRadius : 0.0
     }
 }
 
@@ -298,6 +313,11 @@ extension EGTextField{
     public func setCornerRadius(_ radius: CGFloat) -> Self{
         var copy = self
         copy.cornerRadius = radius
+        return copy
+    }
+    public func setBorderType(_ type: BorderType) -> Self{
+        var copy = self
+        copy.borderType = type
         return copy
     }
 }

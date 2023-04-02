@@ -63,10 +63,10 @@ Dark mode ability is available. You don't need to consider this issue. If you wa
 EGTextField(text: $text)
                 .setTitleText("Title")
 ```
-#### Dark
+#### Light
 <img width="436" alt="Light Mode" src="https://user-images.githubusercontent.com/35576161/229367808-3a6649ad-bc3b-489b-9b2d-69918f9cc0af.png">
 
-#### Light
+#### Dark
 <img width="436" alt="Dark Mode" src="https://user-images.githubusercontent.com/35576161/229367802-2e7e209e-531a-46cd-b81f-c1aa1750881b.png">
 
 ## Examples
@@ -80,6 +80,17 @@ EGTextField(text: $text)
 ```
 
 <img width="436" alt="Default" src="https://user-images.githubusercontent.com/35576161/228702554-e2f74f8f-3f08-4903-a557-1a9bbb827315.png">
+
+#### Line Border
+
+```swift
+@State var text = "Esat Gozcu"
+
+EGTextField(text: $text)
+                .setBorderType(.line)
+```
+
+<img width="436" alt="Line Border" src="https://user-images.githubusercontent.com/35576161/229378481-9c1c3dd4-8107-4138-9052-685647cd59ff.png">
 
 #### Title
 

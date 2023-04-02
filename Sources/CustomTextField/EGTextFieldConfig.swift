@@ -38,4 +38,10 @@ public class EGTextFieldConfig{
     var errorFont : Font = .footnote
     var borderWidth : CGFloat = 1.0
     var cornerRadius : CGFloat = 5.0
+    var borderType: BorderType = .square
+}
+
+public enum BorderType {
+    case square
+    case line
 }
