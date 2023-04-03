@@ -54,7 +54,7 @@ public struct EGTextField: View {
     private var defaultBorderColor = EGTextFieldConfig.shared.defaultBorderColor
     private var darkModeBorderColor = EGTextFieldConfig.shared.darkModeBorderColor
     //Focused Border Color
-    private var focusBorderColorEnable = EGTextFieldConfig.shared.focusBorderColorEnable
+    private var focusedBorderColorEnable = EGTextFieldConfig.shared.focusedBorderColorEnable
     private var defaultFocusedBorderColor = EGTextFieldConfig.shared.defaultFocusedBorderColor
     private var darkModeFocusedBorderColor = EGTextFieldConfig.shared.darkModeFocusedBorderColor
     //Default
@@ -160,7 +160,7 @@ public struct EGTextField: View {
         }
         else{
             if colorScheme == .light{
-                if isFocused && focusBorderColorEnable{
+                if isFocused && focusedBorderColorEnable{
                     return defaultFocusedBorderColor
                 }
                 else{
@@ -168,7 +168,7 @@ public struct EGTextField: View {
                 }
             }
             else{
-                if isFocused && focusBorderColorEnable{
+                if isFocused && focusedBorderColorEnable{
                     return darkModeFocusedBorderColor
                 }
                 else{
@@ -337,7 +337,7 @@ extension EGTextField{
     }
     public func setFocusBorderColorEnable(_ enable: Bool) -> Self{
         var copy = self
-        copy.focusBorderColorEnable = enable
+        copy.focusedBorderColorEnable = enable
         return copy
     }
     public func setFocusedBorderColor(_ color: Color) -> Self{

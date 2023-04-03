@@ -289,7 +289,7 @@ If you want you can change colors.
 @State var text = "Esat Gozcu"
 
 EGTextField(text: $text)
-                .setFocusBorderColorEnable(true)
+                .setFocusedBorderColorEnable(true)
                 .setFocusedBorderColor(.black)
                 .setDarkModeFocusedBorderColor(.white)
 ```
