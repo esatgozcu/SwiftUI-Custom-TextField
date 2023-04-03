@@ -41,6 +41,8 @@ struct ExampleApp: App {
         shared.darkModeTextColor = .white
         shared.defaultTitleColor = .black
         shared.darkModeTitleColor = .white
+        shared.titleFont = .body
+        shared.borderType = .line
         ...
     }
     var body: some Scene {
