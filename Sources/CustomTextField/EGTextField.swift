@@ -12,7 +12,14 @@ public struct EGTextField: View {
     
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @State private var trailingImage : Image?
-    @State private var secureText = false
+    @State private var secureText = false{
+        didSet{
+            if secureText{
+                isFocused = false
+            }
+        }
+    }
+    @State var isFocused = false
     private var text: Binding<String>
     private var disable: Binding<Bool>?
     private var error: Binding<Bool>?
@@ -46,6 +53,10 @@ public struct EGTextField: View {
     //Border Color
     private var defaultBorderColor = EGTextFieldConfig.shared.defaultBorderColor
     private var darkModeBorderColor = EGTextFieldConfig.shared.darkModeBorderColor
+    //Focused Border Color
+    private var focusBorderColorEnable = EGTextFieldConfig.shared.focusBorderColorEnable
+    private var defaultFocusedBorderColor = EGTextFieldConfig.shared.defaultFocusedBorderColor
+    private var darkModeFocusedBorderColor = EGTextFieldConfig.shared.darkModeFocusedBorderColor
     //Default
     private var titleFont = EGTextFieldConfig.shared.titleFont
     private var errorFont = EGTextFieldConfig.shared.errorFont
@@ -107,13 +118,13 @@ public struct EGTextField: View {
                         .disabled(disable?.wrappedValue ?? false)
                 }.background(
                     RoundedRectangle(cornerRadius: getCornerRadius())
-                        .stroke(getBorderColor(), lineWidth: getBorderWidth())
+                        .stroke(getBorderColor(), lineWidth: getBorderWidth(type: .square))
                         .background(getBackgroundColor().cornerRadius(getCornerRadius()))
                 )
                 //Bottom Line
                 if borderType == .line{
                     Rectangle()
-                        .frame(height: borderWidth)
+                        .frame(height: getBorderWidth(type: .line))
                         .foregroundColor(getBorderColor())
                 }
             }
@@ -130,7 +141,14 @@ public struct EGTextField: View {
     }
     func secureAnyView() -> AnyView{
         if !secureText{
-            return AnyView(TextField("", text: text))
+            return AnyView(TextField("", text: text, onEditingChanged: { changed in
+                if changed{
+                    isFocused = true
+                }
+                else{
+                    isFocused = false
+                }
+            }))
         }
         else{
             return AnyView(SecureField("", text: text))
@@ -141,7 +159,22 @@ public struct EGTextField: View {
             return getErrorTextColor()
         }
         else{
-            return colorScheme == .light ? defaultBorderColor : darkModeBorderColor
+            if colorScheme == .light{
+                if isFocused && focusBorderColorEnable{
+                    return defaultFocusedBorderColor
+                }
+                else{
+                    return defaultBorderColor
+                }
+            }
+            else{
+                if isFocused && focusBorderColorEnable{
+                    return darkModeFocusedBorderColor
+                }
+                else{
+                    return darkModeBorderColor
+                }
+            }
         }
     }
     func getBackgroundColor() -> Color{
@@ -164,8 +197,13 @@ public struct EGTextField: View {
     func getTitleTextColor() -> Color{
         return colorScheme == .light ? defaultTitleColor : darkModeTitleColor
     }
-    func getBorderWidth() -> CGFloat{
-        return borderType == .square ? borderWidth : 0.0
+    func getBorderWidth(type: BorderType) -> CGFloat{
+        if type == .square{
+            return borderType == .square ? borderWidth : 0.0
+        }
+        else{
+            return borderWidth
+        }
     }
     func getCornerRadius() -> CGFloat{
         return borderType == .square ? cornerRadius : 0.0
@@ -295,6 +333,21 @@ extension EGTextField{
     public func setDarkModeBorderColor(_ color: Color) -> Self{
         var copy = self
         copy.darkModeBorderColor = color
+        return copy
+    }
+    public func setFocusBorderColorEnable(_ enable: Bool) -> Self{
+        var copy = self
+        copy.focusBorderColorEnable = enable
+        return copy
+    }
+    public func setFocusedBorderColor(_ color: Color) -> Self{
+        var copy = self
+        copy.defaultFocusedBorderColor = color
+        return copy
+    }
+    public func setDarkModeFocusedBorderColor(_ color: Color) -> Self{
+        var copy = self
+        copy.darkModeFocusedBorderColor = color
         return copy
     }
     public func setBorderWidth(_ width: CGFloat) -> Self{

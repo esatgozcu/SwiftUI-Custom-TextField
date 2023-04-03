@@ -31,8 +31,12 @@ public class EGTextFieldConfig{
     public var defaultErrorTextColor : Color = .red
     public var darkModeErrorTextColor : Color = .red
     //Border Color
-    public var defaultBorderColor : Color = .black
-    public var darkModeBorderColor : Color = .white
+    public var defaultBorderColor : Color = .gray
+    public var darkModeBorderColor : Color = .white.opacity(0.7)
+    //Focused Border Color
+    public var focusBorderColorEnable: Bool = false
+    public var defaultFocusedBorderColor : Color = .black
+    public var darkModeFocusedBorderColor : Color = .white
     //Default
     public var titleFont : Font = .callout
     public var errorFont : Font = .footnote

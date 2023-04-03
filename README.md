@@ -269,3 +269,29 @@ EGTextField(text: $text)
 EGTextField(text: $text)
              .setDisableAutoCorrection(true)
 ```
+
+#### Focused Border Color
+
+```swift
+@State var text = "Esat Gozcu"
+
+EGTextField(text: $text)
+                .setFocusBorderColorEnable(true)
+```
+
+<img width="436" alt="Normal" src="https://user-images.githubusercontent.com/35576161/229420508-35d53d38-ba5b-4028-881c-1348254137f6.png">
+
+<img width="436" alt="Focused" src="https://user-images.githubusercontent.com/35576161/229420542-ac5dbbe3-37c8-4273-992a-7f4ac222cd2b.png">
+
+If you want you can change colors.
+
+```swift
+@State var text = "Esat Gozcu"
+
+EGTextField(text: $text)
+                .setFocusBorderColorEnable(true)
+                .setFocusedBorderColor(.black)
+                .setDarkModeFocusedBorderColor(.white)
+```
+
+Warning: This feauture is not working on secureField.
