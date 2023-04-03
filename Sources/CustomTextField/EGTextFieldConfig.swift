@@ -33,6 +33,9 @@ public class EGTextFieldConfig{
     //Border Color
     public var defaultBorderColor : Color = .gray
     public var darkModeBorderColor : Color = .white.opacity(0.7)
+    //Trailing Image Color
+    public var defaultTrailingImageForegroundColor : Color = .black
+    public var darkModeTrailingImageForegroundColor : Color = .white
     //Focused Border Color
     public var focusedBorderColorEnable: Bool = false
     public var defaultFocusedBorderColor : Color = .black

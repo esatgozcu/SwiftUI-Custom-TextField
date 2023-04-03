@@ -169,6 +169,14 @@ EGTextField(text: $text)
 
 <img width="436" alt="Trailing Image" src="https://user-images.githubusercontent.com/35576161/228709637-445ed737-8a0f-4985-a6fd-b7e065588cc9.png">
 
+You can also set image foreground color.
+
+```swift
+EGTextField(text: $text)
+                .setTrailingImageForegroundColor(.black)
+                .setDarkModeTrailingImageForegroundColor(.white)
+```
+
 #### Secure Text
 
 ```swift

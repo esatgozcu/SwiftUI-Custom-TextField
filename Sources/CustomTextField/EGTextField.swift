@@ -53,6 +53,9 @@ public struct EGTextField: View {
     //Border Color
     private var defaultBorderColor = EGTextFieldConfig.shared.defaultBorderColor
     private var darkModeBorderColor = EGTextFieldConfig.shared.darkModeBorderColor
+    //Trailing Image Color
+    private var defaultTrailingImageForegroundColor = EGTextFieldConfig.shared.defaultTrailingImageForegroundColor
+    private var darkModeTrailingImageForegroundColor = EGTextFieldConfig.shared.darkModeTrailingImageForegroundColor
     //Focused Border Color
     private var focusedBorderColorEnable = EGTextFieldConfig.shared.focusedBorderColorEnable
     private var defaultFocusedBorderColor = EGTextFieldConfig.shared.defaultFocusedBorderColor
@@ -70,7 +73,7 @@ public struct EGTextField: View {
     }
     
     public var body: some View{
-        VStack(spacing: 5){
+        VStack(spacing: 8){
             //Title
             if let titleText{
                 Text(titleText)
@@ -104,6 +107,7 @@ public struct EGTextField: View {
                     trailingImage?
                         .resizable()
                         .scaledToFit()
+                        .foregroundColor(getTrailingImageForegroundColor())
                         .frame(width: 25, height: 25)
                         .padding(.trailing, 12)
                         .onTapGesture {
@@ -207,6 +211,9 @@ public struct EGTextField: View {
     }
     func getCornerRadius() -> CGFloat{
         return borderType == .square ? cornerRadius : 0.0
+    }
+    func getTrailingImageForegroundColor() -> Color{
+        return colorScheme == .light ? defaultTrailingImageForegroundColor : darkModeTrailingImageForegroundColor
     }
 }
 
@@ -333,6 +340,16 @@ extension EGTextField{
     public func setDarkModeBorderColor(_ color: Color) -> Self{
         var copy = self
         copy.darkModeBorderColor = color
+        return copy
+    }
+    public func setTrailingImageForegroundColor(_ color: Color) -> Self{
+        var copy = self
+        copy.defaultTrailingImageForegroundColor = color
+        return copy
+    }
+    public func setDarkModeTrailingImageForegroundColor(_ color: Color) -> Self{
+        var copy = self
+        copy.darkModeTrailingImageForegroundColor = color
         return copy
     }
     public func setFocusedBorderColorEnable(_ enable: Bool) -> Self{
