@@ -335,7 +335,7 @@ extension EGTextField{
         copy.darkModeBorderColor = color
         return copy
     }
-    public func setFocusBorderColorEnable(_ enable: Bool) -> Self{
+    public func setFocusedBorderColorEnable(_ enable: Bool) -> Self{
         var copy = self
         copy.focusedBorderColorEnable = enable
         return copy

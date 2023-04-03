@@ -276,7 +276,7 @@ EGTextField(text: $text)
 @State var text = "Esat Gozcu"
 
 EGTextField(text: $text)
-                .setFocusBorderColorEnable(true)
+                .setFocusedBorderColorEnable(true)
 ```
 
 <img width="436" alt="Normal" src="https://user-images.githubusercontent.com/35576161/229420508-35d53d38-ba5b-4028-881c-1348254137f6.png">
