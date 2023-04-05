@@ -47,6 +47,7 @@ public class EGTextFieldConfig{
     public var cornerRadius : CGFloat = 5.0
     public var borderType: BorderType = .square
     public var disableAutoCorrection: Bool = false
+    public var textFieldHeight : CGFloat = 45
 }
 
 public enum BorderType {
