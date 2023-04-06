@@ -144,7 +144,7 @@ public struct EGTextField: View {
             }
         }
     }
-    func secureAnyView() -> AnyView{
+    private func secureAnyView() -> AnyView{
         if !secureText{
             return AnyView(TextField("", text: text, onEditingChanged: { changed in
                 if changed{
@@ -159,7 +159,7 @@ public struct EGTextField: View {
             return AnyView(SecureField("", text: text))
         }
     }
-    func getBorderColor() -> Color{
+    private func getBorderColor() -> Color{
         if error?.wrappedValue ?? false {
             return getErrorTextColor()
         }
@@ -182,7 +182,7 @@ public struct EGTextField: View {
             }
         }
     }
-    func getBackgroundColor() -> Color{
+    private func getBackgroundColor() -> Color{
         if disable?.wrappedValue ?? false{
             return colorScheme == .light ? defaultDisableColor : darkModeDisableColor
         }
@@ -190,19 +190,19 @@ public struct EGTextField: View {
             return colorScheme == .light ? defaultBackgroundColor : darkModeBackgroundColor
         }
     }
-    func getTextColor() -> Color{
+    private func getTextColor() -> Color{
         return colorScheme == .light ? defaultTextColor : darkModeTextColor
     }
-    func getErrorTextColor() -> Color{
+    private func getErrorTextColor() -> Color{
         return colorScheme == .light ? defaultErrorTextColor : darkModeErrorTextColor
     }
-    func getPlaceHolderTextColor() -> Color{
+    private func getPlaceHolderTextColor() -> Color{
         return colorScheme == .light ? defaultPlaceHolderTextColor : darkModePlaceHolderTextColor
     }
-    func getTitleTextColor() -> Color{
+    private func getTitleTextColor() -> Color{
         return colorScheme == .light ? defaultTitleColor : darkModeTitleColor
     }
-    func getBorderWidth(type: BorderType) -> CGFloat{
+    private func getBorderWidth(type: BorderType) -> CGFloat{
         if type == .square{
             return borderType == .square ? borderWidth : 0.0
         }
@@ -210,10 +210,10 @@ public struct EGTextField: View {
             return borderWidth
         }
     }
-    func getCornerRadius() -> CGFloat{
+    private func getCornerRadius() -> CGFloat{
         return borderType == .square ? cornerRadius : 0.0
     }
-    func getTrailingImageForegroundColor() -> Color{
+    private func getTrailingImageForegroundColor() -> Color{
         return colorScheme == .light ? defaultTrailingImageForegroundColor : darkModeTrailingImageForegroundColor
     }
 }
