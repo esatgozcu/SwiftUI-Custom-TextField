@@ -60,9 +60,11 @@ public struct EGTextField: View {
     private var focusedBorderColorEnable = EGTextFieldConfig.shared.focusedBorderColorEnable
     private var defaultFocusedBorderColor = EGTextFieldConfig.shared.defaultFocusedBorderColor
     private var darkModeFocusedBorderColor = EGTextFieldConfig.shared.darkModeFocusedBorderColor
-    //Default
+    //Font
     private var titleFont = EGTextFieldConfig.shared.titleFont
     private var errorFont = EGTextFieldConfig.shared.errorFont
+    private var placeHolderFont = EGTextFieldConfig.shared.placeHolderFont
+    //Default
     private var borderWidth = EGTextFieldConfig.shared.borderWidth
     private var cornerRadius = EGTextFieldConfig.shared.cornerRadius
     private var borderType = EGTextFieldConfig.shared.borderType
@@ -87,7 +89,9 @@ public struct EGTextField: View {
                 HStack(spacing: 0){
                     secureAnyView()
                         .placeholder(when: text.wrappedValue.isEmpty, placeholder: {
-                            Text(placeHolderText).foregroundColor(getPlaceHolderTextColor())
+                            Text(placeHolderText)
+                                .foregroundColor(getPlaceHolderTextColor())
+                                .font(placeHolderFont)
                         })
                         .frame(maxWidth: .infinity)
                         .frame(height: textFieldHeight)
@@ -253,6 +257,11 @@ extension EGTextField{
     public func setPlaceHolderText(_ placeHolderText: String) -> Self {
         var copy = self
         copy.placeHolderText = placeHolderText
+        return copy
+    }
+    public func setPlaceHolderFont(_ placeHolderFont: Font) -> Self{
+        var copy = self
+        copy.placeHolderFont = placeHolderFont
         return copy
     }
     public func setPlaceHolderTextColor(_ color: Color) -> Self{

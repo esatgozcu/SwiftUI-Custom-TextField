@@ -40,9 +40,11 @@ public class EGTextFieldConfig{
     public var focusedBorderColorEnable: Bool = false
     public var defaultFocusedBorderColor : Color = .black
     public var darkModeFocusedBorderColor : Color = .white
-    //Default
+    //Font
     public var titleFont : Font = .callout
     public var errorFont : Font = .footnote
+    public var placeHolderFont : Font = .subheadline
+    //Default
     public var borderWidth : CGFloat = 1.0
     public var cornerRadius : CGFloat = 5.0
     public var borderType: BorderType = .square
