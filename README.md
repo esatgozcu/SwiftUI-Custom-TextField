@@ -4,6 +4,7 @@
 
 <p align="center">
     <img src="https://img.shields.io/badge/Swift-5.6-orange.svg" alt="Swift 5.6" />
+    <img src="https://img.shields.io/badge/UI-SwiftUI-brown.svg" alt="SwiftUI" />
     <img src="https://img.shields.io/badge/licence-MIT-blue.svg?style=flat" alt="MIT License" />
     <a href= "https://linkedin.com/in/esatgozcu">
         <img src="https://img.shields.io/badge/contact-@esatgozcu-green.svg?style=flat" />
@@ -177,6 +178,8 @@ EGTextField(text: $text)
                 .setDarkModeTrailingImageForegroundColor(.white)
 ```
 
+⚠️ Warning: If you do not use system image. When you add your image, you have to set your 'Render as -> Template Image'. Otherwise you can not use this foreground color feature.
+
 #### Secure Text
 
 ```swift
@@ -278,6 +281,15 @@ EGTextField(text: $text)
              .setDisableAutoCorrection(true)
 ```
 
+#### Set Height
+
+```swift
+@State var text = "Esat Gozcu"
+
+EGTextField(text: $text)
+                .setTextFieldHeight(45)
+```
+
 #### Focused Border Color
 
 ```swift
@@ -302,4 +314,4 @@ EGTextField(text: $text)
                 .setDarkModeFocusedBorderColor(.white)
 ```
 
-Warning: This feauture is not working on secureField.
+⚠️ Warning: This feauture is not working on secureField.
