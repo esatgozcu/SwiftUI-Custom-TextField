@@ -61,6 +61,7 @@ public struct EGTextField: View {
     private var defaultFocusedBorderColor = EGTextFieldConfig.shared.defaultFocusedBorderColor
     private var darkModeFocusedBorderColor = EGTextFieldConfig.shared.darkModeFocusedBorderColor
     //Font
+    private var textFont = EGTextFieldConfig.shared.textFont
     private var titleFont = EGTextFieldConfig.shared.titleFont
     private var errorFont = EGTextFieldConfig.shared.errorFont
     private var placeHolderFont = EGTextFieldConfig.shared.placeHolderFont
@@ -93,6 +94,7 @@ public struct EGTextField: View {
                                 .foregroundColor(getPlaceHolderTextColor())
                                 .font(placeHolderFont)
                         })
+                        .font(textFont)
                         .frame(maxWidth: .infinity)
                         .frame(height: textFieldHeight)
                         .foregroundColor(getTextColor())
