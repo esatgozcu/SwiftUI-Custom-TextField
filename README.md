@@ -15,12 +15,10 @@
 
 This repository developed with only swiftUI, there is no UIViewRepresentable.
 
-#### Requirements
+#### Version Compatibility
 
-- iOS 13.0+
-- Xcode 13+
-- Swift 5+
-
+- iOS 15.0+
+  
 #### Swift Package Manager
 
 CustomTextfield is available through [Swift Package Manager](https://swift.org/package-manager/). Add CustomTextField as a dependency to your `Package.swift`:
@@ -339,3 +337,19 @@ var body: some View {
 ```
 
 ⚠️ Warning: SecureTextField requires iOS 15 or later.
+
+<br>
+
+### License
+
+This framework is provided under the MIT License. Feel free to modify and use it in your projects.
+
+### Contributions
+
+Contributions are welcome! If you have ideas or improvements, feel free to:
+
+- Fork the repository.
+- Submit a pull request.
+- Report issues or feature requests in the Issues tab.
+
+Thank you for contributing! 😊
