@@ -6,16 +6,23 @@
 //
 
 import SwiftUI
+import CustomTextField
 
 struct ContentView: View {
+    @State private var password: String = "Test FocusState"
+    @FocusState private var isPasswordFieldFocused: Bool
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            EGTextField(text: $password)
+                .setSecureText(true)
+                .setBorderColor(isPasswordFieldFocused ? .gray : .gray.opacity(0.1))
+                .focused($isPasswordFieldFocused)
+            Button("Close Keyboard") {
+                isPasswordFieldFocused = false
+            }
+            .padding()
         }
-        .padding()
     }
 }
 

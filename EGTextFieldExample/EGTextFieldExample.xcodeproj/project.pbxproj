@@ -3,14 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		F1F059612D58754800D7AE94 /* EGTextFieldExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F059602D58754800D7AE94 /* EGTextFieldExampleApp.swift */; };
 		F1F059632D58754800D7AE94 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F059622D58754800D7AE94 /* ContentView.swift */; };
 		F1F059652D58754C00D7AE94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1F059642D58754C00D7AE94 /* Assets.xcassets */; };
-		F1F059682D58754C00D7AE94 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1F059672D58754C00D7AE94 /* Preview Assets.xcassets */; };
+		F1F059702D58759300D7AE94 /* CustomTextField in Frameworks */ = {isa = PBXBuildFile; productRef = F1F0596F2D58759300D7AE94 /* CustomTextField */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,7 +18,6 @@
 		F1F059602D58754800D7AE94 /* EGTextFieldExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EGTextFieldExampleApp.swift; sourceTree = "<group>"; };
 		F1F059622D58754800D7AE94 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F1F059642D58754C00D7AE94 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F1F059672D58754C00D7AE94 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +25,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1F059702D58759300D7AE94 /* CustomTextField in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,17 +54,8 @@
 				F1F059602D58754800D7AE94 /* EGTextFieldExampleApp.swift */,
 				F1F059622D58754800D7AE94 /* ContentView.swift */,
 				F1F059642D58754C00D7AE94 /* Assets.xcassets */,
-				F1F059662D58754C00D7AE94 /* Preview Content */,
 			);
 			path = EGTextFieldExample;
-			sourceTree = "<group>";
-		};
-		F1F059662D58754C00D7AE94 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				F1F059672D58754C00D7AE94 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +74,9 @@
 			dependencies = (
 			);
 			name = EGTextFieldExample;
+			packageProductDependencies = (
+				F1F0596F2D58759300D7AE94 /* CustomTextField */,
+			);
 			productName = EGTextFieldExample;
 			productReference = F1F0595D2D58754800D7AE94 /* EGTextFieldExample.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +105,9 @@
 				Base,
 			);
 			mainGroup = F1F059542D58754800D7AE94;
+			packageReferences = (
+				F1F0596E2D58759300D7AE94 /* XCLocalSwiftPackageReference ".." */,
+			);
 			productRefGroup = F1F0595E2D58754800D7AE94 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -125,7 +122,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F1F059682D58754C00D7AE94 /* Preview Assets.xcassets in Resources */,
 				F1F059652D58754C00D7AE94 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,7 +267,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"EGTextFieldExample/Preview Content\"";
 				DEVELOPMENT_TEAM = BUJ3SV57CM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -300,7 +295,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"EGTextFieldExample/Preview Content\"";
 				DEVELOPMENT_TEAM = BUJ3SV57CM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -344,6 +338,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		F1F0596E2D58759300D7AE94 /* XCLocalSwiftPackageReference ".." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ..;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F1F0596F2D58759300D7AE94 /* CustomTextField */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CustomTextField;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F1F059552D58754800D7AE94 /* Project object */;
 }

@@ -303,7 +303,7 @@ EGTextField(text: $text)
 
 <img width="436" alt="Focused" src="https://user-images.githubusercontent.com/35576161/229420542-ac5dbbe3-37c8-4273-992a-7f4ac222cd2b.png">
 
-If you want you can change colors.
+You can change the colors if you want.
 
 ```swift
 @State var text = "Esat Gozcu"
@@ -315,3 +315,26 @@ EGTextField(text: $text)
 ```
 
 ⚠️ Warning: This feauture is not working on secureField.
+
+EGTextField has been designed with SwiftUI’s flexibility in mind, allowing the use of features it does not natively include.
+Alternatively, you can try the following approach.
+
+```swift
+@State private var password: String = "Test FocusState"
+@FocusState private var isPasswordFieldFocused: Bool
+
+var body: some View {
+    VStack {
+        EGTextField(text: $password)
+            .setSecureText(true)
+            .setBorderColor(isPasswordFieldFocused ? .gray : .gray.opacity(0.1))
+            .focused($isPasswordFieldFocused)
+        Button("Close Keyboard") {
+            isPasswordFieldFocused = false
+        }
+        .padding()
+    }
+}
+```
+
+⚠️ Warning: SecureTextField requires iOS 15 or later.
