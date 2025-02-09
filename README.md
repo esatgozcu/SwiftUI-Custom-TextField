@@ -314,7 +314,8 @@ EGTextField(text: $text)
                 .setDarkModeFocusedBorderColor(.white)
 ```
 
-⚠️ Warning: This feauture is not working on secureField.
+⚠️ Warning: This feauture is not working on secureField.  
+<br>
 
 EGTextField has been designed with SwiftUI’s flexibility in mind, allowing the use of features it does not natively include.
 Alternatively, you can try the following approach.
