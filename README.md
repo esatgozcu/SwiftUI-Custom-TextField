@@ -11,7 +11,7 @@
     </a>
 </p>
 
-# SwiftUI Custom TextField
+# EGTextField - SwiftUI Custom TextField
 
 This repository developed with only swiftUI, there is no UIViewRepresentable.
 
